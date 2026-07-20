@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lucky Star Casino 🎰 – Menangkan Jackpot Besar!</title>
+  <meta name="description" content="Lucky Star Casino – Rasakan sensasi bermain slot machine, blackjack, dan roulette online terbaik dengan jackpot fantastis!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Particles Background -->
+  <div id="particles-container"></div>
+
+  <!-- Navigation -->
+  <nav id="main-nav">
+    <div class="nav-brand">
+      <span class="star-icon">⭐</span>
+      <span class="brand-text">Lucky<span class="highlight">Star</span></span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">Lobby Kasino</a>
+    </div>
+    <div class="nav-auth" id="nav-auth-guest">
+      <button class="btn-secondary" id="btn-login-nav">Login</button>
+      <button class="btn-primary" id="btn-register-nav" style="padding: 8px 16px; font-size: 0.9rem;">Register</button>
+    </div>
+    <div class="nav-wallet" id="nav-auth-user" style="display: none;">
+      <div class="wallet-display">
+        <span class="wallet-icon">👤</span>
+        <span class="wallet-label" id="nav-username">User</span>
+      </div>
+      <div class="wallet-display">
+        <span class="wallet-icon">💰</span>
+        <span class="wallet-label">Saldo</span>
+        <span class="wallet-amount" id="nav-balance">Rp 0</span>
+      </div>
+      <button class="btn-topup" id="btn-topup-nav">+ Top Up</button>
+      <button class="btn-secondary" id="btn-withdraw-nav" style="padding: 8px 16px; font-size: 0.9rem; border-color: #dc143c; color: #dc143c;">Tarik</button>
+      <button class="btn-secondary" id="btn-logout-nav" style="padding: 8px 16px; font-size: 0.9rem;">Logout</button>
+      <a href="admin.html" class="btn-primary" id="btn-admin-nav" style="display: none; padding: 8px 16px; font-size: 0.9rem; text-decoration: none;">Admin</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero-section" class="page-section active">
+    <div class="hero-content">
+      <div class="hero-badge">🎰 CASINO #1 INDONESIA</div>
+      <h1 class="hero-title">
+        <span class="title-line1">LUCKY STAR</span>
+        <span class="title-line2">CASINO</span>
+      </h1>
+      <p class="hero-subtitle">Rasakan sensasi jackpot fantastis dengan grafis premium dan gameplay terbaik!</p>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-value counter" data-target="50000">0</span>
+          <span class="stat-label">Pemain Aktif</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">Rp<span class="counter" data-target="5">0</span>M</span>
+          <span class="stat-label">Jackpot Hari Ini</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value"><span class="counter" data-target="99">0</span>%</span>
+          <span class="stat-label">Win Rate</span>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href="slot.html" class="btn-primary" style="display:inline-block; text-decoration:none; padding:15px 30px; font-size:1.2rem;">🎰 Main Sekarang!</a>
+        <button class="btn-secondary" id="btn-topup-hero">💰 Top Up</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="jackpot-display">
+        <div class="jackpot-label">🏆 JACKPOT PROGRESIF</div>
+        <div class="jackpot-amount" id="jackpot-ticker">Rp 12.847.391</div>
+      </div>
+      <div class="mini-slot-preview">
+        <div class="preview-reel" id="prev-reel-1">🍒</div>
+        <div class="preview-reel" id="prev-reel-2">💎</div>
+        <div class="preview-reel" id="prev-reel-3">🍒</div>
+      </div>
+      <div class="floating-chips">
+        <div class="chip chip-1">💎</div>
+        <div class="chip chip-2">🃏</div>
+        <div class="chip chip-3">🎲</div>
+        <div class="chip chip-4">💰</div>
+        <div class="chip chip-5">⭐</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Lobby Section -->
+  <section id="lobby-section" class="page-section active" style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+    <div class="section-header" style="text-align: center; margin-bottom: 40px;">
+      <h2 class="section-title" style="font-size: 2.5rem; color: white; font-family: 'Orbitron', monospace;">🎮 Pilihan Game</h2>
+      <p class="section-subtitle" style="color: var(--text-secondary);">Pilih permainan favoritmu dan menangkan jutaan rupiah!</p>
+    </div>
+    
+    <div class="games-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+      
+      <!-- Slot Game Card -->
+      <a href="slot.html" class="game-card" style="display: block; background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); overflow: hidden; text-decoration: none; transition: transform 0.3s, border-color 0.3s;">
+        <div class="game-card-img" style="height: 200px; background: linear-gradient(135deg, #FF6B6B, #C0392B); display: flex; align-items: center; justify-content: center; font-size: 5rem;">🎰</div>
+        <div class="game-card-info" style="padding: 20px;">
+          <h3 style="font-family: 'Orbitron', monospace; color: white; margin-bottom: 8px;">Candy Clusters Slot</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Game slot 7x7 dengan sistem cluster pays dan free spins berlimpah.</p>
+        </div>
+      </a>
+
+      <!-- Crash Game Card -->
+      <a href="crash.html" class="game-card" style="display: block; background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); overflow: hidden; text-decoration: none; transition: transform 0.3s, border-color 0.3s;">
+        <div class="game-card-img" style="height: 200px; background: linear-gradient(135deg, #1A2980, #26D0CE); display: flex; align-items: center; justify-content: center; font-size: 5rem;">🚀</div>
+        <div class="game-card-info" style="padding: 20px;">
+          <h3 style="font-family: 'Orbitron', monospace; color: white; margin-bottom: 8px;">Rocket Crash</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Tarik uangmu sebelum roket meledak! Perkalian tanpa batas.</p>
+        </div>
+      </a>
+
+      <!-- Dice Game Card -->
+      <a href="dice.html" class="game-card" style="display: block; background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); overflow: hidden; text-decoration: none; transition: transform 0.3s, border-color 0.3s;">
+        <div class="game-card-img" style="height: 200px; background: linear-gradient(135deg, #0f9b0f, #000000); display: flex; align-items: center; justify-content: center; font-size: 5rem;">🎲</div>
+        <div class="game-card-info" style="padding: 20px;">
+          <h3 style="font-family: 'Orbitron', monospace; color: white; margin-bottom: 8px;">Hi-Lo Dice</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Tebak dadu dengan probabilitas kemenangan yang bisa diatur sendiri.</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+  <!-- Auth Modals -->
+  <div class="modal-overlay" id="login-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>🔐 Login</h3>
+        <button class="modal-close" id="close-login">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group" style="margin-bottom: 15px;">
+          <input type="text" id="login-username" placeholder="Username" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--dark-border); color: white; border-radius: var(--radius-sm); font-family: 'Rajdhani', sans-serif; font-size: 1rem;" />
+        </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <input type="password" id="login-password" placeholder="Password" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--dark-border); color: white; border-radius: var(--radius-sm); font-family: 'Rajdhani', sans-serif; font-size: 1rem;" />
+        </div>
+        <button class="btn-primary" id="submit-login" style="width: 100%; padding: 12px;">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="register-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>📝 Register</h3>
+        <button class="modal-close" id="close-register">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group" style="margin-bottom: 15px;">
+          <input type="text" id="register-username" placeholder="Username" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--dark-border); color: white; border-radius: var(--radius-sm); font-family: 'Rajdhani', sans-serif; font-size: 1rem;" />
+        </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <input type="password" id="register-password" placeholder="Password" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--dark-border); color: white; border-radius: var(--radius-sm); font-family: 'Rajdhani', sans-serif; font-size: 1rem;" />
+        </div>
+        <button class="btn-primary" id="submit-register" style="width: 100%; padding: 12px;">Register</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Withdraw Modal -->
+  <div class="modal-overlay" id="withdraw-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>💸 Tarik Saldo</h3>
+        <button class="modal-close" id="close-withdraw">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">Masukkan jumlah yang ingin ditarik dan nomor rekening Anda.</p>
+        <div class="form-group" style="margin-bottom: 15px;">
+          <input type="number" id="withdraw-amount" placeholder="Jumlah (Min 50.000)" min="50000" step="10000" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--dark-border); color: white; border-radius: var(--radius-sm); font-family: 'Rajdhani', sans-serif; font-size: 1rem;" />
+        </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <input type="text" id="withdraw-account" placeholder="Nomor Rekening / E-Wallet" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--dark-border); color: white; border-radius: var(--radius-sm); font-family: 'Rajdhani', sans-serif; font-size: 1rem;" />
+        </div>
+        <button class="btn-primary" id="submit-withdraw" style="width: 100%; padding: 12px;">Proses Penarikan</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="lobby.js"></script>
+  
+</body>
+</html>
