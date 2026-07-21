@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Settings, Users, Save, Shield, TrendingUp, Activity, DollarSign, Crown } from 'lucide-react';
+import { Settings, Users, Save, Shield, TrendingUp, Activity, DollarSign, Crown, Coins } from 'lucide-react';
 
 export default function AdminPanel() {
   const [users, setUsers] = useState([]);
