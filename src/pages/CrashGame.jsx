@@ -65,88 +65,92 @@ export default function CrashGame({ user, setUser }) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 flex flex-col md:flex-row gap-6">
-      {/* Play Panel */}
-      <div className="w-full md:w-1/3 bg-gray-800 p-6 rounded-2xl border border-gray-700 shadow-xl">
-        <h2 className="text-2xl font-bold mb-6 flex items-center">
-          <Rocket className="mr-2 text-blue-400" /> Crash
-        </h2>
+    <div className="max-w-6xl mx-auto p-4 flex flex-col md:flex-row gap-8">
+      <div className="w-full md:w-1/3 bg-casino-slate/80 backdrop-blur-md p-8 rounded-[30px] border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] flex flex-col justify-between relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-neon-cyan to-transparent"></div>
         
-        <div className="space-y-4">
-          <div>
-            <label className="block text-gray-400 text-sm mb-1">Bet Amount</label>
-            <input 
-              type="number" 
-              value={bet}
-              onChange={(e) => setBet(Number(e.target.value))}
-              disabled={loading || isRunning}
-              className="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 outline-none"
-            />
-          </div>
+        <div>
+          <h2 className="text-3xl font-black mb-8 flex items-center bg-clip-text text-transparent bg-gradient-to-r from-neon-cyan to-blue-500 tracking-tight">
+            <Rocket className="w-8 h-8 mr-3 text-neon-cyan drop-shadow-[0_0_10px_rgba(0,243,255,0.5)]" /> 
+            SPACE CRASH
+          </h2>
           
-          <div>
-            <label className="block text-gray-400 text-sm mb-1">Target Auto-Cashout</label>
-            <div className="relative">
-              <input 
-                type="number" 
-                step="0.1"
-                min="1.01"
-                value={targetMultiplier}
-                onChange={(e) => setTargetMultiplier(Number(e.target.value))}
-                disabled={loading || isRunning}
-                className="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 outline-none"
-              />
-              <span className="absolute right-4 top-3 text-gray-500 font-bold">x</span>
+          <div className="space-y-6 mb-8">
+            <div className="bg-black/50 p-5 rounded-2xl border border-white/5">
+              <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-2">Bet Amount</label>
+              <div className="relative">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-casino-gold font-bold">$</span>
+                <input 
+                  type="number" 
+                  value={bet}
+                  onChange={(e) => setBet(Number(e.target.value))}
+                  disabled={loading || isRunning}
+                  className="w-full bg-transparent border-b-2 border-casino-gold/30 pl-8 py-2 text-2xl font-black text-white focus:border-casino-gold outline-none disabled:opacity-50 transition-colors font-mono"
+                />
+              </div>
+            </div>
+            
+            <div className="bg-black/50 p-5 rounded-2xl border border-white/5">
+              <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-2">Auto Cashout</label>
+              <div className="relative">
+                <input 
+                  type="number" 
+                  step="0.1"
+                  min="1.01"
+                  value={targetMultiplier}
+                  onChange={(e) => setTargetMultiplier(Number(e.target.value))}
+                  disabled={loading || isRunning}
+                  className="w-full bg-transparent border-b-2 border-neon-cyan/30 py-2 text-2xl font-black text-white focus:border-neon-cyan outline-none disabled:opacity-50 transition-colors font-mono"
+                />
+                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-neon-cyan font-black text-xl">x</span>
+              </div>
             </div>
           </div>
-
-          <button 
-            onClick={handlePlay} 
-            disabled={loading || isRunning}
-            className="w-full py-4 rounded-xl font-bold text-lg text-white bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-blue-500/25"
-          >
-            {isRunning ? 'FLYING...' : 'PLACE BET'}
-          </button>
         </div>
+
+        <button 
+          onClick={handlePlay} 
+          disabled={loading || isRunning}
+          className="w-full py-5 rounded-2xl font-black tracking-widest text-xl text-black bg-gradient-to-r from-neon-cyan via-blue-300 to-neon-cyan hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100 transition-all shadow-[0_0_20px_rgba(0,243,255,0.4)]"
+        >
+          {isRunning ? 'FLYING...' : 'PLACE BET'}
+        </button>
       </div>
 
-      {/* Game Display */}
-      <div className="w-full md:w-2/3 flex flex-col gap-4">
-        {/* Graph Area */}
-        <div className={`relative h-64 md:h-96 rounded-2xl border overflow-hidden flex items-center justify-center transition-all ${result ? (result.isWin ? 'border-green-500 bg-green-500/10' : 'border-red-500 bg-red-500/10') : 'border-gray-700 bg-gray-800'}`}>
-          <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at center, #3b82f6 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+      <div className="w-full md:w-2/3 flex flex-col gap-6">
+        <div className={`relative h-64 md:h-[450px] rounded-[30px] border-2 shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden flex items-center justify-center transition-all duration-300 ${result ? (result.isWin ? 'border-neon-green bg-green-500/10' : 'border-red-500 bg-red-500/10') : 'border-white/10 bg-black'}`}>
+          <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at center, #00f3ff 2px, transparent 2px)', backgroundSize: '40px 40px' }}></div>
           
-          <div className="text-center z-10">
-            <div className={`text-7xl font-black font-mono transition-colors ${result ? (result.isWin ? 'text-green-400' : 'text-red-500') : 'text-white'}`}>
+          <div className="text-center z-10 p-8 rounded-3xl bg-black/40 backdrop-blur-sm border border-white/5">
+            <div className={`text-8xl font-black font-mono transition-colors drop-shadow-xl ${result ? (result.isWin ? 'neon-text-green text-green-400' : 'text-red-500') : 'text-white'}`}>
               {liveMultiplier.toFixed(2)}x
             </div>
             {result && (
-              <div className="mt-4 text-xl font-bold">
+              <div className="mt-4 text-2xl font-black tracking-wider">
                 {result.isWin ? (
-                  <span className="text-green-400">You won {result.winAmount.toLocaleString()}!</span>
+                  <span className="text-neon-green">+{result.winAmount.toLocaleString()} WON</span>
                 ) : (
-                  <span className="text-red-500">Crashed! You lost {bet}</span>
+                  <span className="text-red-500">CRASHED!</span>
                 )}
               </div>
             )}
           </div>
           
           {isRunning && (
-            <div className="absolute bottom-10 left-10 text-blue-400 animate-bounce">
-              <Rocket className="w-12 h-12 transform rotate-45" />
+            <div className="absolute bottom-10 left-10 text-neon-cyan animate-float filter drop-shadow-[0_0_15px_rgba(0,243,255,0.8)]">
+              <Rocket className="w-16 h-16 transform rotate-45" />
             </div>
           )}
         </div>
 
-        {/* History */}
-        <div className="bg-gray-800 rounded-xl p-4 border border-gray-700 flex items-center gap-2 overflow-x-auto">
-          <History className="text-gray-400 w-5 h-5 flex-shrink-0" />
+        <div className="bg-black/50 backdrop-blur-md rounded-[20px] p-5 border border-white/5 flex items-center gap-3 overflow-x-auto shadow-lg">
+          <History className="text-gray-400 w-6 h-6 flex-shrink-0" />
           {history.map((h, i) => (
-            <span key={i} className={`px-3 py-1 rounded-full text-sm font-bold flex-shrink-0 ${h >= 2.0 ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+            <span key={i} className={`px-4 py-1.5 rounded-full text-sm font-black tracking-wider flex-shrink-0 border ${h >= 2.0 ? 'bg-green-500/10 text-neon-green border-neon-green/30' : 'bg-red-500/10 text-red-400 border-red-500/30'}`}>
               {h.toFixed(2)}x
             </span>
           ))}
-          {history.length === 0 && <span className="text-gray-500 text-sm">No history yet</span>}
+          {history.length === 0 && <span className="text-gray-500 text-sm font-medium tracking-wide">Awaiting History...</span>}
         </div>
       </div>
     </div>

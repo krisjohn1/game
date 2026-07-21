@@ -35,10 +35,10 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen text-white flex flex-col font-sans">
       <Navbar user={user} onLoginClick={() => setAuthModalOpen(true)} onLogout={handleLogout} />
       
-      <main className="container mx-auto p-4 pt-20">
+      <main className="container mx-auto p-4 pt-24 flex-grow flex flex-col">
         <Routes>
           <Route path="/" element={<Lobby />} />
           <Route path="/slot" element={user ? <SlotGame user={user} setUser={setUser} /> : <Navigate to="/" />} />

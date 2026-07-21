@@ -6,59 +6,79 @@ export default function Lobby() {
   const games = [
     {
       id: 'slot',
-      name: 'Sweet Bonanza',
+      name: 'NEON SLOTS',
       path: '/slot',
-      icon: <Cherry className="w-12 h-12 text-pink-400 mb-4" />,
-      color: 'from-pink-500 to-rose-500',
-      description: 'Spin to win big with tumbling reels and multipliers!'
+      image: '/images/slot.png',
+      color: 'from-neon-pink to-purple-600',
+      shadow: 'shadow-[0_0_30px_rgba(255,0,255,0.3)]',
+      border: 'border-neon-pink/50',
+      description: 'Spin the reels of fortune.'
     },
     {
       id: 'crash',
-      name: 'Rocket Crash',
+      name: 'SPACE CRASH',
       path: '/crash',
-      icon: <Rocket className="w-12 h-12 text-blue-400 mb-4" />,
-      color: 'from-blue-500 to-cyan-500',
-      description: 'Cash out before the rocket crashes to multiply your bet.'
+      image: '/images/crash.png',
+      color: 'from-neon-cyan to-blue-600',
+      shadow: 'shadow-[0_0_30px_rgba(0,243,255,0.3)]',
+      border: 'border-neon-cyan/50',
+      description: 'Ride the multiplier rocket.'
     },
     {
       id: 'dice',
-      name: 'Dice Roll',
+      name: 'CYBER DICE',
       path: '/dice',
-      icon: <Dices className="w-12 h-12 text-purple-400 mb-4" />,
-      color: 'from-purple-500 to-indigo-500',
-      description: 'Set your chance and roll the dice for instant wins.'
+      image: '/images/dice.png',
+      color: 'from-purple-500 to-indigo-600',
+      shadow: 'shadow-[0_0_30px_rgba(168,85,247,0.3)]',
+      border: 'border-purple-500/50',
+      description: 'Roll the glowing cubes.'
     }
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh]">
-      <div className="text-center mb-12">
-        <h1 className="text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-          Choose Your Game
+    <div className="flex flex-col items-center justify-center min-h-[85vh] pt-10">
+      <div className="text-center mb-16 relative">
+        <div className="absolute inset-0 blur-[100px] bg-casino-gold/20 -z-10 rounded-full"></div>
+        <h1 className="text-6xl font-black mb-4 tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-yellow-100 to-casino-gold drop-shadow-[0_0_15px_rgba(251,191,36,0.5)]">
+          VIP CASINO LOUNGE
         </h1>
-        <p className="text-gray-400 text-lg">Play responsibly and aim for the stars.</p>
+        <p className="text-gray-300 text-xl font-light tracking-wide uppercase">Experience The Next Generation of Betting</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl px-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-7xl px-6">
         {games.map(game => (
           <Link 
             key={game.id} 
             to={game.path}
-            className="group relative bg-gray-800 rounded-2xl p-8 border border-gray-700 hover:border-gray-500 transition-all overflow-hidden flex flex-col items-center text-center shadow-xl hover:shadow-2xl"
+            className={`group relative h-96 rounded-3xl overflow-hidden border border-white/10 transition-all duration-500 hover:scale-105 hover:z-10 ${game.shadow} hover:${game.border}`}
           >
-            <div className={`absolute inset-0 bg-gradient-to-br ${game.color} opacity-0 group-hover:opacity-10 transition-opacity`} />
+            {/* Background Image */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              style={{ backgroundImage: `url(${game.image})` }}
+            />
             
-            <div className="transform group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-300">
-              {game.icon}
-            </div>
+            {/* Dark Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-casino-dark via-casino-dark/80 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500" />
             
-            <h3 className="text-2xl font-bold text-white mb-2">{game.name}</h3>
-            <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
-              {game.description}
-            </p>
+            {/* Content */}
+            <div className="absolute inset-0 p-8 flex flex-col justify-end">
+              <h3 className="text-4xl font-black text-white mb-2 tracking-tight drop-shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                {game.name}
+              </h3>
+              <p className="text-gray-300 font-medium opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                {game.description}
+              </p>
 
-            <div className={`mt-6 px-6 py-2 rounded-full bg-gradient-to-r ${game.color} opacity-0 group-hover:opacity-100 transition-all font-bold text-white shadow-lg`}>
-              PLAY NOW
+              <div className={`mt-6 overflow-hidden rounded-xl h-12 relative w-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-200`}>
+                <div className={`absolute inset-0 bg-gradient-to-r ${game.color} animate-pulse-glow`}></div>
+                <div className="absolute inset-[2px] bg-casino-dark rounded-[10px] flex items-center justify-center">
+                  <span className={`font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r ${game.color}`}>
+                    PLAY NOW
+                  </span>
+                </div>
+              </div>
             </div>
           </Link>
         ))}
