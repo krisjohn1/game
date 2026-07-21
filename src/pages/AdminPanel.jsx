@@ -6,7 +6,7 @@ export default function AdminPanel() {
   const [settings, setSettings] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3030';
+  const API_URL = import.meta.env.PROD ? '' : 'http://localhost:3030';
 
   const fetchAdminData = async () => {
     try {

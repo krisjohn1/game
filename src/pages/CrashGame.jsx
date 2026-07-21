@@ -10,7 +10,7 @@ export default function CrashGame({ user, setUser }) {
   const [liveMultiplier, setLiveMultiplier] = useState(1.0);
   const [isRunning, setIsRunning] = useState(false);
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3030';
+  const API_URL = import.meta.env.PROD ? '' : 'http://localhost:3030';
 
   const handlePlay = async () => {
     if (bet <= 0 || targetMultiplier <= 1.0) return;
