@@ -212,12 +212,12 @@ export default function Lobby() {
       <footer className="w-full bg-black/80 border-t border-white/10 pt-16 pb-8 mt-10 rounded-t-[40px] px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div>
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-casino-gold to-yellow-200 flex items-center justify-center">
-                <span className="text-black font-extrabold text-sm">L</span>
+            <div className="flex items-center space-x-2 mb-6 group">
+              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-casino-gold/50 shadow-[0_0_15px_rgba(251,191,36,0.3)] flex items-center justify-center bg-black">
+                <img src="/images/logo.png" alt="Scorpio88 Logo" className="w-full h-full object-cover" />
               </div>
               <span className="text-xl font-black tracking-wider text-white">
-                LUCKY<span className="text-casino-gold">STAR</span>
+                SCORPIO<span className="text-casino-gold">88</span>
               </span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
@@ -265,7 +265,7 @@ export default function Lobby() {
         </div>
         
         <div className="border-t border-white/5 pt-8 text-center text-xs text-gray-600 font-medium">
-          <p>© 2026 LUCKYSTAR CASINO. All rights reserved.</p>
+          <p>© 2026 SCORPIO88 CASINO. All rights reserved.</p>
           <p className="mt-2">Licensed and regulated by the Government of Curacao.</p>
         </div>
       </footer>

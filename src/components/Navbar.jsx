@@ -6,11 +6,11 @@ export default function Navbar({ user, onLoginClick, onLogout }) {
   return (
     <nav className="fixed top-0 left-0 right-0 h-20 glass-panel z-50 flex items-center justify-between px-8 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
       <Link to="/" className="flex items-center space-x-2 group">
-        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-casino-gold to-yellow-200 flex items-center justify-center animate-pulse-glow">
-          <span className="text-black font-extrabold text-xl">L</span>
+        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-casino-gold/50 shadow-[0_0_15px_rgba(251,191,36,0.3)] animate-pulse-glow flex items-center justify-center bg-black">
+          <img src="/images/logo.png" alt="Scorpio88 Logo" className="w-full h-full object-cover" />
         </div>
         <span className="text-2xl font-black tracking-wider text-white group-hover:text-casino-gold transition-colors duration-300">
-          LUCKY<span className="text-casino-gold">STAR</span>
+          SCORPIO<span className="text-casino-gold">88</span>
         </span>
       </Link>
 
