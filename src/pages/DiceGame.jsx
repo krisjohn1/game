@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Dices, ArrowDown, ArrowUp } from 'lucide-react';
+import BigWinCelebration from '../components/BigWinCelebration';
 
 export default function DiceGame({ user, setUser }) {
   const [bet, setBet] = useState(100);
@@ -7,14 +8,19 @@ export default function DiceGame({ user, setUser }) {
   const [condition, setCondition] = useState('under'); // 'under' or 'over'
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
+  const [showBigWin, setShowBigWin] = useState(false);
+  const [bigWinAmount, setBigWinAmount] = useState(0);
   
   const targetNumber = condition === 'under' ? chance : (100 - chance);
   const multiplier = (99 / chance).toFixed(2);
+
+  const diceSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2004/2004-preview.mp3');
 
   const handlePlay = async () => {
     if (bet <= 0 || chance < 1 || chance > 98) return;
     setLoading(true);
     setResult(null);
+    diceSound.play().catch(e => console.log(e));
 
     const API_URL = import.meta.env.PROD ? '' : 'http://localhost:3030';
     try {
@@ -31,6 +37,11 @@ export default function DiceGame({ user, setUser }) {
       if (res.ok && data.success) {
         setResult(data);
         setUser({ ...user, balance: data.newBalance });
+        
+        if (data.win && data.payout >= bet * 5) {
+          setBigWinAmount(data.payout - bet);
+          setShowBigWin(true);
+        }
       } else {
         alert(data.error);
       }
@@ -142,6 +153,13 @@ export default function DiceGame({ user, setUser }) {
           </div>
         )}
       </div>
+
+      {showBigWin && (
+        <BigWinCelebration 
+          amount={bigWinAmount} 
+          onClose={() => setShowBigWin(false)} 
+        />
+      )}
     </div>
   );
 }

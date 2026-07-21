@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Rocket, History } from 'lucide-react';
+import BigWinCelebration from '../components/BigWinCelebration';
 
 export default function CrashGame({ user, setUser }) {
   const [bet, setBet] = useState(100);
@@ -9,8 +10,12 @@ export default function CrashGame({ user, setUser }) {
   const [history, setHistory] = useState([]);
   const [liveMultiplier, setLiveMultiplier] = useState(1.0);
   const [isRunning, setIsRunning] = useState(false);
+  const [showBigWin, setShowBigWin] = useState(false);
+  const [bigWinAmount, setBigWinAmount] = useState(0);
 
   const API_URL = import.meta.env.PROD ? '' : 'http://localhost:3030';
+  
+  const launchSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2005/2005-preview.mp3');
 
   const handlePlay = async () => {
     if (bet <= 0 || targetMultiplier <= 1.0) return;
@@ -18,6 +23,7 @@ export default function CrashGame({ user, setUser }) {
     setResult(null);
     setIsRunning(true);
     setLiveMultiplier(1.0);
+    launchSound.play().catch(e => console.log(e));
 
     try {
       const res = await fetch(`${API_URL}/api/game/crash/play`, {
@@ -49,6 +55,11 @@ export default function CrashGame({ user, setUser }) {
             setUser({ ...user, balance: data.newBalance });
             setHistory(prev => [data.crashPoint, ...prev].slice(0, 10));
             setLoading(false);
+            
+            if (data.isWin && data.payout >= bet * 5) {
+              setBigWinAmount(data.payout - bet);
+              setShowBigWin(true);
+            }
           }
         };
         requestAnimationFrame(animate);
@@ -153,6 +164,13 @@ export default function CrashGame({ user, setUser }) {
           {history.length === 0 && <span className="text-gray-500 text-sm font-medium tracking-wide">Awaiting History...</span>}
         </div>
       </div>
+
+      {showBigWin && (
+        <BigWinCelebration 
+          amount={bigWinAmount} 
+          onClose={() => setShowBigWin(false)} 
+        />
+      )}
     </div>
   );
 }

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Cherry, Sparkles, Play } from 'lucide-react';
+import BigWinCelebration from '../components/BigWinCelebration';
 
 export default function SlotGame({ user, setUser }) {
   const [bet, setBet] = useState(100);
@@ -7,6 +8,10 @@ export default function SlotGame({ user, setUser }) {
   const [grid, setGrid] = useState(Array(49).fill('❓'));
   const [result, setResult] = useState(null);
   const [animating, setAnimating] = useState(false);
+  const [showBigWin, setShowBigWin] = useState(false);
+  const [bigWinAmount, setBigWinAmount] = useState(0);
+
+  const spinSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3');
 
   const handleSpin = async () => {
     if (bet <= 0 || loading || animating) return;
@@ -14,6 +19,7 @@ export default function SlotGame({ user, setUser }) {
     
     setLoading(true);
     setResult(null);
+    spinSound.play().catch(e => console.log(e));
 
     const API_URL = import.meta.env.PROD ? '' : 'http://localhost:3030';
     try {
@@ -48,6 +54,8 @@ export default function SlotGame({ user, setUser }) {
       
       // Flash winning clusters if any
       if (step.clusters.length > 0) {
+        const clusterSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3');
+        clusterSound.play().catch(e => console.log(e));
         await new Promise(r => setTimeout(r, 600)); 
       }
       // Delay before next tumble
@@ -63,6 +71,11 @@ export default function SlotGame({ user, setUser }) {
     });
     setAnimating(false);
     setLoading(false);
+
+    if (data.totalWinAmount >= bet * 5) {
+      setBigWinAmount(data.totalWinAmount);
+      setShowBigWin(true);
+    }
   };
 
   return (
@@ -157,6 +170,13 @@ export default function SlotGame({ user, setUser }) {
           ))}
         </div>
       </div>
+
+      {showBigWin && (
+        <BigWinCelebration 
+          amount={bigWinAmount} 
+          onClose={() => setShowBigWin(false)} 
+        />
+      )}
     </div>
   );
 }
