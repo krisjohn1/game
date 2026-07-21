@@ -232,10 +232,10 @@ export default function Lobby() {
           <div className="mt-4 md:mt-0">
             <h4 className="text-white font-bold mb-4 md:mb-6 tracking-widest uppercase text-sm md:text-base">Information</h4>
             <ul className="space-y-2 md:space-y-3 text-xs md:text-sm text-gray-400">
-              <li className="hover:text-casino-gold cursor-pointer transition-colors">About Us</li>
-              <li className="hover:text-casino-gold cursor-pointer transition-colors">Terms & Conditions</li>
-              <li className="hover:text-casino-gold cursor-pointer transition-colors">Privacy Policy</li>
-              <li className="hover:text-casino-gold cursor-pointer transition-colors">Responsible Gaming</li>
+              <li><Link to="/about" className="hover:text-casino-gold cursor-pointer transition-colors">About Us</Link></li>
+              <li><Link to="/terms" className="hover:text-casino-gold cursor-pointer transition-colors">Terms & Conditions</Link></li>
+              <li><Link to="/privacy" className="hover:text-casino-gold cursor-pointer transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/responsible-gaming" className="hover:text-casino-gold cursor-pointer transition-colors">Responsible Gaming</Link></li>
             </ul>
           </div>
           
