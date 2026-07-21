@@ -6,7 +6,9 @@
     "admin": "ADMIN",
     "balance": "Balance",
     "deposit": "DEPOSIT",
-    "language": "Language"
+    "language": "Language",
+    "soundOn": "Sound On",
+    "soundOff": "Sound Off"
   },
   "auth": {
     "vipLogin": "VIP LOGIN",
@@ -43,7 +45,19 @@
     "spaceCrashDesc": "Watch the rocket soar! Cash out before it crashes",
     "cyberDice": "Cyber Dice",
     "cyberDiceDesc": "Classic dice game with custom odds and high multipliers",
-    "marquee": "🔥 LATEST WINNER: JackpotKing99 won $125,000 on Neon Slots! | 🎰 SPECIAL EVENT: 2X Rewards Weekend on all games! | 💎 VIP EXCLUSIVE: 15% Rakeback for all VIP members! | 🚀 NEW: Space Crash now with TURBO MODE!"
+    "marquee": "🔥 LATEST WINNER: JackpotKing99 won $125,000 on Neon Slots! | 🎰 SPECIAL EVENT: 2X Rewards Weekend on all games! | 💎 VIP EXCLUSIVE: 15% Rakeback for all VIP members! | 🚀 NEW: Space Crash now with TURBO MODE!",
+    "justWon": "just won",
+    "on": "on",
+    "categories": {
+      "hotGames": "HOT GAMES",
+      "slots": "SLOTS",
+      "liveCasino": "LIVE CASINO",
+      "sports": "SPORTS",
+      "promotions": "PROMOTIONS",
+      "originals": "ORIGINALS"
+    },
+    "comingSoon": "COMING SOON",
+    "comingSoonDesc": "This category is currently under development. Please check back later!"
   },
   "games": {
     "betAmount": "Bet Amount",

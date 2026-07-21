@@ -1,16 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Coins, LogOut, Settings, UserCircle, LogIn, Wallet, Globe } from 'lucide-react';
+import { Coins, LogOut, Settings, UserCircle, LogIn, Wallet, Globe, Volume2, VolumeX } from 'lucide-react';
 import WalletModal from './WalletModal';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Navbar({ user, onLoginClick, onLogout }) {
   const [showWallet, setShowWallet] = useState(false);
   const [showLangMenu, setShowLangMenu] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(false);
+  const audioRef = useRef(null);
   const { lang, changeLang, t } = useLanguage();
+
+  useEffect(() => {
+    if (audioRef.current) {
+      if (soundEnabled) {
+        audioRef.current.play().catch(e => {
+            console.log("Auto-play blocked");
+            setSoundEnabled(false);
+        });
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  }, [soundEnabled]);
 
   return (
     <>
+      <audio ref={audioRef} loop src="https://assets.mixkit.co/active_storage/sfx/135/135-preview.mp3" preload="auto" />
       <nav className="fixed top-0 left-0 right-0 h-20 glass-panel z-50 flex items-center justify-between px-4 md:px-8 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
         <Link to="/" className="flex items-center space-x-2 group">
           <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border-2 border-casino-gold/50 shadow-[0_0_15px_rgba(251,191,36,0.3)] animate-pulse-glow flex items-center justify-center bg-black">
@@ -57,6 +73,21 @@ export default function Navbar({ user, onLoginClick, onLogout }) {
               </>
             )}
           </div>
+
+          <button
+            onClick={() => setSoundEnabled(!soundEnabled)}
+            className="flex items-center justify-center p-2 md:p-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-gray-300 hover:text-white transition-all group relative"
+            title={soundEnabled ? t('nav.soundOff') : t('nav.soundOn')}
+          >
+            {soundEnabled ? (
+              <Volume2 className="w-4 h-4 md:w-5 md:h-5 text-casino-gold" />
+            ) : (
+              <VolumeX className="w-4 h-4 md:w-5 md:h-5" />
+            )}
+            <span className="absolute -bottom-10 right-0 bg-black/90 text-[10px] text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap border border-white/10 pointer-events-none transition-opacity duration-200">
+                {soundEnabled ? t('nav.soundOff') : t('nav.soundOn')}
+            </span>
+          </button>
 
           {user ? (
             <>

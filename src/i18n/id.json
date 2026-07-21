@@ -6,7 +6,9 @@
     "admin": "ADMIN",
     "balance": "Saldo",
     "deposit": "DEPOSIT",
-    "language": "Bahasa"
+    "language": "Bahasa",
+    "soundOn": "Suara Nyala",
+    "soundOff": "Suara Mati"
   },
   "auth": {
     "vipLogin": "MASUK VIP",
@@ -43,7 +45,19 @@
     "spaceCrashDesc": "Tonton roket melambung! Ambil kemenangan sebelum jatuh",
     "cyberDice": "Cyber Dice",
     "cyberDiceDesc": "Permainan dadu klasik dengan peluang kustom dan multiplier tinggi",
-    "marquee": "🔥 PEMENANG TERBARU: JackpotKing99 memenangkan $125,000 di Neon Slots! | 🎰 EVENT SPESIAL: 2X Hadiah Akhir Pekan di semua permainan! | 💎 VIP EKSKLUSIF: Rakeback 15% untuk semua anggota VIP! | 🚀 BARU: Space Crash sekarang dengan TURBO MODE!"
+    "marquee": "🔥 PEMENANG TERBARU: JackpotKing99 memenangkan $125,000 di Neon Slots! | 🎰 EVENT SPESIAL: 2X Hadiah Akhir Pekan di semua permainan! | 💎 VIP EKSKLUSIF: Rakeback 15% untuk semua anggota VIP! | 🚀 BARU: Space Crash sekarang dengan TURBO MODE!",
+    "justWon": "baru saja memenangkan",
+    "on": "di",
+    "categories": {
+      "hotGames": "GAME POPULER",
+      "slots": "SLOT",
+      "liveCasino": "KASINO LIVE",
+      "sports": "OLAHRAGA",
+      "promotions": "PROMOSI",
+      "originals": "ORIGINAL"
+    },
+    "comingSoon": "SEGERA HADIR",
+    "comingSoonDesc": "Kategori ini sedang dalam pengembangan. Silakan kembali lagi nanti!"
   },
   "games": {
     "betAmount": "Jumlah Taruhan",
