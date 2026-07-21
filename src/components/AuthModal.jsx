@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { X, Lock, User, Crown } from 'lucide-react';
+import { X, Lock, User, Crown, Eye, EyeOff, Mail } from 'lucide-react';
 
 export default function AuthModal({ onClose, onSuccess }) {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -14,12 +16,16 @@ export default function AuthModal({ onClose, onSuccess }) {
     setLoading(true);
     const endpoint = isLogin ? '/api/login' : '/api/register';
     
+    const payload = isLogin 
+      ? { username, password } // backend will treat 'username' field as username/email
+      : { username, email, password };
+
     const API_URL = import.meta.env.PROD ? '' : 'http://localhost:3030';
     try {
       const res = await fetch(`${API_URL}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify(payload)
       });
       const data = await res.json();
       
@@ -71,7 +77,9 @@ export default function AuthModal({ onClose, onSuccess }) {
 
           <div className="space-y-5">
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Username</label>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">
+                {isLogin ? 'Username / Email' : 'Username'}
+              </label>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <User className="h-5 w-5 text-gray-500 group-focus-within:text-casino-gold transition-colors" />
@@ -82,10 +90,29 @@ export default function AuthModal({ onClose, onSuccess }) {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="block w-full pl-12 pr-4 py-4 bg-gray-900/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-casino-gold/50 focus:border-casino-gold/50 transition-all font-medium text-lg"
-                  placeholder="Enter username"
+                  placeholder={isLogin ? "Enter username or email" : "Enter username"}
                 />
               </div>
             </div>
+
+            {!isLogin && (
+              <div>
+                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Email Address</label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <Mail className="h-5 w-5 text-gray-500 group-focus-within:text-casino-gold transition-colors" />
+                  </div>
+                  <input 
+                    type="email" 
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="block w-full pl-12 pr-4 py-4 bg-gray-900/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-casino-gold/50 focus:border-casino-gold/50 transition-all font-medium text-lg"
+                    placeholder="Enter email address"
+                  />
+                </div>
+              </div>
+            )}
 
             <div>
               <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Password</label>
@@ -94,13 +121,20 @@ export default function AuthModal({ onClose, onSuccess }) {
                   <Lock className="h-5 w-5 text-gray-500 group-focus-within:text-casino-gold transition-colors" />
                 </div>
                 <input 
-                  type="password" 
+                  type={showPassword ? "text" : "password"} 
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-12 pr-4 py-4 bg-gray-900/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-casino-gold/50 focus:border-casino-gold/50 transition-all font-medium text-lg"
+                  className="block w-full pl-12 pr-12 py-4 bg-gray-900/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-casino-gold/50 focus:border-casino-gold/50 transition-all font-medium text-lg"
                   placeholder="••••••••"
                 />
+                <button 
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-500 hover:text-casino-gold transition-colors"
+                >
+                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                </button>
               </div>
             </div>
           </div>
@@ -116,7 +150,7 @@ export default function AuthModal({ onClose, onSuccess }) {
           <div className="text-center mt-6">
             <button 
               type="button" 
-              onClick={() => { setIsLogin(!isLogin); setError(''); setUsername(''); setPassword(''); }}
+              onClick={() => { setIsLogin(!isLogin); setError(''); setUsername(''); setEmail(''); setPassword(''); setShowPassword(false); }}
               className="text-gray-400 hover:text-white font-medium text-sm transition-colors border-b border-transparent hover:border-casino-gold pb-0.5"
             >
               {isLogin ? "Don't have an account? Register Now" : "Already a VIP? Login Here"}

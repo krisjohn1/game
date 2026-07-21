@@ -3,6 +3,7 @@
 CREATE TABLE IF NOT EXISTS users (
     id BIGSERIAL PRIMARY KEY,
     username TEXT UNIQUE NOT NULL,
+    email TEXT UNIQUE,
     password_hash TEXT NOT NULL,
     role TEXT DEFAULT 'user',
     balance BIGINT DEFAULT 1000,

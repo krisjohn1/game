@@ -19,13 +19,23 @@ function authenticateToken(req, res, next) {
 }
 
 router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password } = req.body; // 'username' could be username or email
     try {
-        const { data: user, error } = await supabase
+        let { data: user, error } = await supabase
             .from('users')
             .select('*')
             .eq('username', username)
             .single();
+
+        if (!user) {
+            const resEmail = await supabase
+                .from('users')
+                .select('*')
+                .eq('email', username)
+                .single();
+            user = resEmail.data;
+            error = resEmail.error;
+        }
 
         if (error || !user) return res.status(400).json({ error: 'User not found' });
 
@@ -40,8 +50,8 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-    const { username, password } = req.body;
-    if (!username || !password) return res.status(400).json({ error: 'Username and password required' });
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) return res.status(400).json({ error: 'Username, email and password required' });
 
     try {
         const hash = await bcrypt.hash(password, 10);
@@ -49,11 +59,11 @@ router.post('/register', async (req, res) => {
         // Supabase Postgres Insert
         const { data, error } = await supabase
             .from('users')
-            .insert([{ username, password_hash: hash }])
+            .insert([{ username, email, password_hash: hash }])
             .select();
 
         if (error) {
-            if (error.code === '23505') return res.status(400).json({ error: 'Username already exists' });
+            if (error.code === '23505') return res.status(400).json({ error: 'Username or email already exists' });
             return res.status(500).json({ error: 'Database error' });
         }
         
