@@ -4,6 +4,7 @@ import Lobby from './pages/Lobby';
 import SlotGame from './pages/SlotGame';
 import CrashGame from './pages/CrashGame';
 import DiceGame from './pages/DiceGame';
+import MinesGame from './pages/MinesGame';
 import AdminPanel from './pages/AdminPanel';
 import AboutUs from './pages/AboutUs';
 import TermsConditions from './pages/TermsConditions';
@@ -48,6 +49,7 @@ function App() {
           <Route path="/slot" element={user ? <SlotGame user={user} setUser={setUser} /> : <Navigate to="/" />} />
           <Route path="/crash" element={user ? <CrashGame user={user} setUser={setUser} /> : <Navigate to="/" />} />
           <Route path="/dice" element={user ? <DiceGame user={user} setUser={setUser} /> : <Navigate to="/" />} />
+          <Route path="/mines" element={user ? <MinesGame user={user} setUser={setUser} /> : <Navigate to="/" />} />
           <Route path="/admin" element={user?.role === 'admin' ? <AdminPanel /> : <Navigate to="/" />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/terms" element={<TermsConditions />} />

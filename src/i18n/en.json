@@ -252,5 +252,15 @@
     "language": "Language",
     "indonesian": "Bahasa Indonesia",
     "english": "English"
+  },
+  "mines": {
+    "title": "CYBER MINES",
+    "minesCount": "Number of Mines",
+    "cashout": "CASHOUT",
+    "nextMultiplier": "Next Multiplier",
+    "play": "PLAY",
+    "playing": "PLAYING...",
+    "youWon": "YOU WON",
+    "hitMine": "YOU HIT A MINE!"
   }
 }

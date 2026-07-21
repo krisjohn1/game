@@ -49,16 +49,15 @@ export default function Lobby() {
       provider: 'Evolution Gaming',
       hot: false
     },
-    // Adding dummy games for real-world feel
     {
-      id: 'dummy1',
-      name: 'GATES OF OLYMPUS',
-      path: '/slot',
-      image: '/images/slot.png',
-      color: 'from-yellow-400 to-orange-500',
-      shadow: 'shadow-[0_0_30px_rgba(251,191,36,0.3)]',
-      border: 'border-yellow-400/50',
-      provider: 'Pragmatic Play',
+      id: 'mines',
+      name: 'CYBER MINES',
+      path: '/mines',
+      image: '/images/dice.png', // Temporary image
+      color: 'from-cyan-400 to-blue-500',
+      shadow: 'shadow-[0_0_30px_rgba(34,211,238,0.3)]',
+      border: 'border-cyan-400/50',
+      provider: 'Spribe',
       hot: true
     },
     {

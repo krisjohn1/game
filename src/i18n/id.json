@@ -252,5 +252,15 @@
     "language": "Bahasa",
     "indonesian": "Bahasa Indonesia",
     "english": "English"
+  },
+  "mines": {
+    "title": "CYBER MINES",
+    "minesCount": "Jumlah Ranjau",
+    "cashout": "CAIRKAN",
+    "nextMultiplier": "Multiplier Berikutnya",
+    "play": "MAIN",
+    "playing": "BERMAIN...",
+    "youWon": "ANDA MENANG",
+    "hitMine": "ANDA TERKENA RANJAU!"
   }
 }

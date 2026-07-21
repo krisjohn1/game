@@ -326,4 +326,39 @@ router.post('/dice/play', authenticateToken, async (req, res) => {
     }
 });
 
+// MINES GAME (Simple client-trust model for demonstration)
+router.post('/mines/result', authenticateToken, async (req, res) => {
+    const bet = parseInt(req.body.bet, 10);
+    const winAmount = parseInt(req.body.winAmount, 10);
+    
+    if (isNaN(bet) || bet < 0 || isNaN(winAmount) || winAmount < 0) {
+        return res.status(400).json({ error: 'Invalid bet or win amount' });
+    }
+
+    try {
+        const { data: userRow, error: userErr } = await supabase
+            .from('users')
+            .select('balance')
+            .eq('id', req.user.id)
+            .single();
+
+        if (userErr || !userRow) return res.status(404).json({ error: 'User not found' });
+        
+        // We assume the game deducts the bet and adds the winAmount
+        const newBalance = userRow.balance - bet + winAmount;
+        if (newBalance < 0) return res.status(400).json({ error: 'Insufficient balance' });
+
+        const { error: updateErr } = await supabase
+            .from('users')
+            .update({ balance: newBalance })
+            .eq('id', req.user.id);
+
+        if (updateErr) return res.status(500).json({ error: 'Failed to update balance' });
+        res.json({ success: true, newBalance });
+
+    } catch (err) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 module.exports = router;
