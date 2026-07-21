@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { X, Wallet, CreditCard, Bitcoin, CheckCircle2 } from 'lucide-react';
-
+import { useLanguage } from '../context/LanguageContext';
 export default function WalletModal({ onClose, user }) {
+  const { t } = useLanguage();
   const [amount, setAmount] = useState(100);
   const [method, setMethod] = useState('qris');
   const [step, setStep] = useState(1);
 
   const methods = [
     { id: 'qris', name: 'QRIS', icon: <CreditCard className="w-6 h-6 text-blue-400" /> },
-    { id: 'bank', name: 'Bank Transfer', icon: <Wallet className="w-6 h-6 text-green-400" /> },
+    { id: 'bank', name: t('wallet.bankTransfer'), icon: <Wallet className="w-6 h-6 text-green-400" /> },
     { id: 'crypto', name: 'Crypto (USDT)', icon: <Bitcoin className="w-6 h-6 text-yellow-500" /> }
   ];
 
@@ -27,7 +28,7 @@ export default function WalletModal({ onClose, user }) {
         <div className="flex justify-between items-center p-6 border-b border-gray-800">
           <h2 className="text-2xl font-black text-white flex items-center">
             <Wallet className="w-6 h-6 mr-2 text-casino-gold" />
-            CASHIER
+            {t('wallet.cashier')}
           </h2>
           <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors">
             <X className="w-6 h-6" />
@@ -38,12 +39,12 @@ export default function WalletModal({ onClose, user }) {
           {step === 1 && (
             <div className="space-y-6 animate-in slide-in-from-right-4">
               <div className="bg-black/50 p-4 rounded-xl border border-white/5 flex justify-between items-center">
-                <span className="text-gray-400 font-bold uppercase tracking-wider text-sm">Current Balance</span>
+                <span className="text-gray-400 font-bold uppercase tracking-wider text-sm">{t('wallet.currentBalance')}</span>
                 <span className="text-xl font-mono font-black text-casino-gold">${user?.balance?.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
               </div>
 
               <div>
-                <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-3">Select Method</label>
+                <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-3">{t('wallet.selectMethod')}</label>
                 <div className="grid grid-cols-3 gap-3">
                   {methods.map(m => (
                     <button 
@@ -59,7 +60,7 @@ export default function WalletModal({ onClose, user }) {
               </div>
 
               <div>
-                <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-3">Deposit Amount</label>
+                <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-3">{t('wallet.depositAmount')}</label>
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold">$</span>
                   <input 
@@ -86,7 +87,7 @@ export default function WalletModal({ onClose, user }) {
                 onClick={handleDeposit}
                 className="w-full py-4 rounded-xl font-black tracking-widest text-lg text-black bg-gradient-to-r from-casino-gold via-yellow-300 to-casino-gold hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(251,191,36,0.3)]"
               >
-                DEPOSIT NOW
+                {t('wallet.depositNow')}
               </button>
             </div>
           )}
@@ -94,8 +95,8 @@ export default function WalletModal({ onClose, user }) {
           {step === 2 && (
             <div className="flex flex-col items-center justify-center py-12 animate-in zoom-in">
               <div className="w-16 h-16 border-4 border-gray-700 border-t-casino-gold rounded-full animate-spin mb-6"></div>
-              <h3 className="text-xl font-bold text-white mb-2">Processing Payment...</h3>
-              <p className="text-gray-400 text-center text-sm">Please complete the payment in your {methods.find(m=>m.id===method)?.name} app.</p>
+              <h3 className="text-xl font-bold text-white mb-2">{t('wallet.processing')}</h3>
+              <p className="text-gray-400 text-center text-sm">{t('wallet.pleaseComplete')} {methods.find(m=>m.id===method)?.name} app.</p>
             </div>
           )}
 
@@ -104,13 +105,13 @@ export default function WalletModal({ onClose, user }) {
               <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mb-6">
                 <CheckCircle2 className="w-12 h-12 text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.5)]" />
               </div>
-              <h3 className="text-2xl font-black text-white mb-2 tracking-wide">PAYMENT RECEIVED</h3>
-              <p className="text-gray-400 text-center text-sm mb-6">Your balance will be updated automatically in the real version.</p>
+              <h3 className="text-2xl font-black text-white mb-2 tracking-wide">{t('wallet.paymentReceived')}</h3>
+              <p className="text-gray-400 text-center text-sm mb-6">{t('wallet.balanceUpdated')}</p>
               <button 
                 onClick={onClose}
                 className="w-full py-3 rounded-xl font-bold text-white bg-gray-800 hover:bg-gray-700 transition-colors"
               >
-                RETURN TO LOBBY
+                {t('wallet.returnToLobby')}
               </button>
             </div>
           )}

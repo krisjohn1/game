@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Settings, Users, Save, Shield, TrendingUp, Activity, DollarSign, Crown, Coins } from 'lucide-react';
-
+import { useLanguage } from '../context/LanguageContext';
 export default function AdminPanel() {
   const [users, setUsers] = useState([]);
   const [settings, setSettings] = useState({});
   const [loading, setLoading] = useState(true);
+  const { t } = useLanguage();
 
   const API_URL = import.meta.env.PROD ? '' : 'http://localhost:3030';
 
@@ -41,12 +42,12 @@ export default function AdminPanel() {
       });
       if (res.ok) {
         setSettings({ ...settings, [key]: value });
-        alert('Setting saved!');
+        alert(t('admin.settingSaved'));
       } else {
-        alert('Failed to save setting');
+        alert(t('admin.settingFailed'));
       }
     } catch (err) {
-      alert('Error connecting to server');
+      alert(t('admin.serverError'));
     }
   };
 
@@ -61,65 +62,65 @@ export default function AdminPanel() {
         body: JSON.stringify({ rtp })
       });
       if (res.ok) {
-        alert('User RTP updated!');
+        alert(t('admin.rtpUpdated'));
         fetchAdminData();
       } else {
-        alert('Failed to update RTP');
+        alert(t('admin.rtpFailed'));
       }
     } catch (err) {
-      alert('Error connecting to server');
+      alert(t('admin.serverError'));
     }
   };
 
-  if (loading) return <div className="text-center p-12 text-casino-gold animate-pulse">Loading VIP Admin Panel...</div>;
+  if (loading) return <div className="text-center p-12 text-casino-gold animate-pulse">{t('admin.loading')}</div>;
 
   return (
     <div className="max-w-7xl mx-auto p-4 space-y-8 animate-in fade-in duration-500">
       <div className="flex items-center text-4xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-casino-gold to-yellow-200 drop-shadow-[0_0_15px_rgba(251,191,36,0.3)]">
         <Crown className="w-10 h-10 mr-4 text-casino-gold drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]" />
-        VIP CASINO DASHBOARD
+        {t('admin.dashboard')}
       </div>
 
       {/* Fake Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="bg-black/60 backdrop-blur-md rounded-2xl p-6 border-l-4 border-l-neon-green border-y border-r border-white/5 shadow-[0_0_20px_rgba(57,255,20,0.1)] hover:-translate-y-1 transition-transform">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-gray-400 font-bold uppercase tracking-widest text-xs">Today's Revenue</span>
+            <span className="text-gray-400 font-bold uppercase tracking-widest text-xs">{t('admin.todayRevenue')}</span>
             <DollarSign className="w-5 h-5 text-neon-green" />
           </div>
           <div className="text-3xl font-black font-mono text-white">$142,590.00</div>
           <div className="text-xs text-neon-green font-bold mt-2 flex items-center">
-            <TrendingUp className="w-3 h-3 mr-1" /> +12.5% from yesterday
+            <TrendingUp className="w-3 h-3 mr-1" /> +12.5% {t('admin.fromYesterday')}
           </div>
         </div>
 
         <div className="bg-black/60 backdrop-blur-md rounded-2xl p-6 border-l-4 border-l-neon-pink border-y border-r border-white/5 shadow-[0_0_20px_rgba(236,72,153,0.1)] hover:-translate-y-1 transition-transform">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-gray-400 font-bold uppercase tracking-widest text-xs">Active Players</span>
+            <span className="text-gray-400 font-bold uppercase tracking-widest text-xs">{t('admin.activePlayers')}</span>
             <Users className="w-5 h-5 text-neon-pink" />
           </div>
           <div className="text-3xl font-black font-mono text-white">1,204</div>
           <div className="text-xs text-neon-pink font-bold mt-2 flex items-center">
-            <Activity className="w-3 h-3 mr-1" /> 45 currently in-game
+            <Activity className="w-3 h-3 mr-1" /> 45 {t('admin.currently')}
           </div>
         </div>
 
         <div className="bg-black/60 backdrop-blur-md rounded-2xl p-6 border-l-4 border-l-casino-gold border-y border-r border-white/5 shadow-[0_0_20px_rgba(251,191,36,0.1)] hover:-translate-y-1 transition-transform">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-gray-400 font-bold uppercase tracking-widest text-xs">Total Bets</span>
+            <span className="text-gray-400 font-bold uppercase tracking-widest text-xs">{t('admin.totalBets')}</span>
             <Coins className="w-5 h-5 text-casino-gold" />
           </div>
           <div className="text-3xl font-black font-mono text-white">45,892</div>
-          <div className="text-xs text-casino-gold font-bold mt-2">In the last 24 hours</div>
+          <div className="text-xs text-casino-gold font-bold mt-2">{t('admin.inLast24h')}</div>
         </div>
 
         <div className="bg-black/60 backdrop-blur-md rounded-2xl p-6 border-l-4 border-l-purple-500 border-y border-r border-white/5 shadow-[0_0_20px_rgba(168,85,247,0.1)] hover:-translate-y-1 transition-transform">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-gray-400 font-bold uppercase tracking-widest text-xs">House Edge</span>
+            <span className="text-gray-400 font-bold uppercase tracking-widest text-xs">{t('admin.houseEdge')}</span>
             <Shield className="w-5 h-5 text-purple-500" />
           </div>
           <div className="text-3xl font-black font-mono text-white">4.2%</div>
-          <div className="text-xs text-purple-400 font-bold mt-2">Optimal profit margin</div>
+          <div className="text-xs text-purple-400 font-bold mt-2">{t('admin.optimalMargin')}</div>
         </div>
       </div>
 
@@ -127,11 +128,11 @@ export default function AdminPanel() {
         {/* Global Settings */}
         <div className="lg:col-span-1 bg-black/80 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
           <h2 className="text-2xl font-black mb-6 flex items-center text-white tracking-widest">
-            <Settings className="w-6 h-6 mr-3 text-casino-gold" /> ALGORITHMS
+            <Settings className="w-6 h-6 mr-3 text-casino-gold" /> {t('admin.algorithms')}
           </h2>
           <div className="space-y-6">
             <div className="bg-gray-900/50 p-5 rounded-2xl border border-white/5">
-              <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-3">Global Slot RTP (%)</label>
+              <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-3">{t('admin.globalSlotRtp')}</label>
               <div className="relative flex items-center">
                 <input 
                   type="number"
@@ -143,10 +144,10 @@ export default function AdminPanel() {
                   onClick={() => handleUpdateSetting('slot_rtp', settings['slot_rtp'])}
                   className="absolute right-2 bg-gradient-to-r from-casino-gold to-yellow-400 hover:from-yellow-400 hover:to-casino-gold text-black px-4 py-1.5 rounded-lg text-sm font-black tracking-widest transition-all shadow-[0_0_15px_rgba(251,191,36,0.3)]"
                 >
-                  APPLY
+                  {t('admin.apply')}
                 </button>
               </div>
-              <p className="text-xs text-gray-500 mt-3 font-medium">Controls how often players hit the jackpot. Lower = more house profit.</p>
+              <p className="text-xs text-gray-500 mt-3 font-medium">{t('admin.rtpDesc')}</p>
             </div>
           </div>
         </div>
@@ -154,17 +155,17 @@ export default function AdminPanel() {
         {/* User Management */}
         <div className="lg:col-span-2 bg-black/80 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
           <h2 className="text-2xl font-black mb-6 flex items-center text-white tracking-widest">
-            <Users className="w-6 h-6 mr-3 text-casino-gold" /> PLAYER DATABASE
+            <Users className="w-6 h-6 mr-3 text-casino-gold" /> {t('admin.playerDatabase')}
           </h2>
           
           <div className="overflow-x-auto rounded-2xl border border-white/5">
             <table className="w-full min-w-[500px] text-left border-collapse bg-gray-900/30">
               <thead>
                 <tr className="bg-black/50 text-gray-400 text-xs font-bold uppercase tracking-widest">
-                  <th className="p-4 border-b border-white/5">Player</th>
-                  <th className="p-4 border-b border-white/5">Role</th>
-                  <th className="p-4 border-b border-white/5 text-right">Balance</th>
-                  <th className="p-4 border-b border-white/5">Target RTP</th>
+                  <th className="p-4 border-b border-white/5">{t('admin.player')}</th>
+                  <th className="p-4 border-b border-white/5">{t('admin.role')}</th>
+                  <th className="p-4 border-b border-white/5 text-right">{t('admin.balance')}</th>
+                  <th className="p-4 border-b border-white/5">{t('admin.targetRtp')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
@@ -202,7 +203,7 @@ export default function AdminPanel() {
                 ))}
                 {users.length === 0 && (
                   <tr>
-                    <td colSpan="4" className="p-12 text-center text-gray-500 font-bold tracking-widest">NO PLAYERS FOUND</td>
+                    <td colSpan="4" className="p-12 text-center text-gray-500 font-bold tracking-widest">{t('admin.noPlayers')}</td>
                   </tr>
                 )}
               </tbody>
