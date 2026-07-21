@@ -95,20 +95,20 @@ export default function Lobby() {
     <div className="flex flex-col w-full min-h-screen pb-20">
       
       {/* 1. HERO BANNER CAROUSEL */}
-      <div className="w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden relative mt-4 shadow-[0_0_40px_rgba(251,191,36,0.15)] border border-white/10 group cursor-pointer">
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10 flex items-center px-10 md:px-20">
+      <div className="w-full h-[250px] md:h-[400px] rounded-2xl md:rounded-3xl overflow-hidden relative mt-4 shadow-[0_0_40px_rgba(251,191,36,0.15)] border border-white/10 group cursor-pointer">
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10 flex items-center px-6 md:px-20">
           <div className="max-w-2xl">
-            <div className="inline-block px-4 py-1 rounded-full bg-red-500/20 border border-red-500/50 text-red-400 font-bold tracking-widest text-sm mb-4 flex items-center w-max animate-pulse">
-              <Zap className="w-4 h-4 mr-2" />
+            <div className="inline-block px-3 py-1 md:px-4 md:py-1 rounded-full bg-red-500/20 border border-red-500/50 text-red-400 font-bold tracking-widest text-[10px] md:text-sm mb-2 md:mb-4 flex items-center w-max animate-pulse">
+              <Zap className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
               HOT PROMO
             </div>
-            <h1 className="text-4xl md:text-6xl font-black text-white mb-4 leading-tight">
+            <h1 className="text-3xl md:text-6xl font-black text-white mb-2 md:mb-4 leading-tight">
               WELCOME BONUS <span className="text-transparent bg-clip-text bg-gradient-to-r from-casino-gold to-yellow-200">100%</span>
             </h1>
-            <p className="text-gray-300 text-lg md:text-xl mb-8 max-w-lg">
+            <p className="text-gray-300 text-sm md:text-xl mb-4 md:mb-8 max-w-lg hidden sm:block">
               Double your first deposit instantly. Experience the most trusted VIP Casino Lounge today!
             </p>
-            <button className="px-8 py-4 bg-gradient-to-r from-casino-gold via-yellow-300 to-casino-gold rounded-xl text-black font-black tracking-widest text-lg hover:scale-105 transition-transform shadow-[0_0_20px_rgba(251,191,36,0.5)]">
+            <button className="px-6 py-2 md:px-8 md:py-4 bg-gradient-to-r from-casino-gold via-yellow-300 to-casino-gold rounded-lg md:rounded-xl text-black font-black tracking-widest text-sm md:text-lg hover:scale-105 transition-transform shadow-[0_0_20px_rgba(251,191,36,0.5)]">
               CLAIM NOW
             </button>
           </div>
@@ -118,29 +118,29 @@ export default function Lobby() {
       </div>
 
       {/* 2. RUNNING TEXT (MARQUEE) */}
-      <div className="w-full bg-black/50 border-y border-white/10 py-3 mt-8 flex items-center overflow-hidden relative">
-        <div className="flex items-center px-4 bg-black z-20 border-r border-white/10">
-          <Megaphone className="w-5 h-5 text-casino-gold mr-2 animate-bounce" />
-          <span className="font-bold text-casino-gold whitespace-nowrap uppercase tracking-widest text-sm">Latest News</span>
+      <div className="w-full bg-black/50 border-y border-white/10 py-2 md:py-3 mt-4 md:mt-8 flex items-center overflow-hidden relative">
+        <div className="flex items-center px-2 md:px-4 bg-black z-20 border-r border-white/10">
+          <Megaphone className="w-4 h-4 md:w-5 md:h-5 text-casino-gold mr-1 md:mr-2 animate-bounce" />
+          <span className="font-bold text-casino-gold whitespace-nowrap uppercase tracking-widest text-[10px] md:text-sm">Latest</span>
         </div>
         <div className="flex-1 overflow-hidden relative flex">
-          <div className="animate-marquee whitespace-nowrap flex items-center text-sm font-medium text-gray-300">
-            <span className="mx-8">🌟 Congratulations to <span className="text-neon-green font-bold">Budi***</span> won <span className="text-white font-bold">$12,500</span> on NEON SLOTS!</span>
-            <span className="mx-8">🔥 NEW GAME: Space Crash is now LIVE! Play now and win up to 10,000x your bet.</span>
-            <span className="mx-8">💰 <span className="text-neon-pink font-bold">Alex***</span> just cashed out <span className="text-white font-bold">$45,000</span> on CYBER DICE!</span>
-            <span className="mx-8">🎁 Weekend Reload Bonus 50% is active until Sunday!</span>
+          <div className="animate-marquee whitespace-nowrap flex items-center text-xs md:text-sm font-medium text-gray-300">
+            <span className="mx-4 md:mx-8">🌟 Congratulations to <span className="text-neon-green font-bold">Budi***</span> won <span className="text-white font-bold">$12,500</span> on NEON SLOTS!</span>
+            <span className="mx-4 md:mx-8">🔥 NEW GAME: Space Crash is now LIVE! Play now and win up to 10,000x your bet.</span>
+            <span className="mx-4 md:mx-8">💰 <span className="text-neon-pink font-bold">Alex***</span> just cashed out <span className="text-white font-bold">$45,000</span> on CYBER DICE!</span>
+            <span className="mx-4 md:mx-8">🎁 Weekend Reload Bonus 50% is active until Sunday!</span>
           </div>
         </div>
       </div>
 
       {/* 3. LIVE JACKPOT TICKER */}
-      <div className="w-full mt-10 mb-6 flex justify-center">
-        <div className="bg-gradient-to-b from-yellow-900/40 to-black p-[2px] rounded-2xl shadow-[0_0_30px_rgba(251,191,36,0.3)]">
-          <div className="bg-black/90 px-10 py-6 rounded-2xl border border-casino-gold/20 flex flex-col items-center">
-            <span className="text-casino-gold text-sm font-bold tracking-[0.3em] uppercase mb-2 flex items-center">
-              <Trophy className="w-4 h-4 mr-2" /> Global Progressive Jackpot
+      <div className="w-full mt-6 md:mt-10 mb-6 flex justify-center">
+        <div className="bg-gradient-to-b from-yellow-900/40 to-black p-[2px] rounded-2xl shadow-[0_0_30px_rgba(251,191,36,0.3)] mx-4 w-full md:w-auto">
+          <div className="bg-black/90 px-4 py-4 md:px-10 md:py-6 rounded-2xl border border-casino-gold/20 flex flex-col items-center">
+            <span className="text-casino-gold text-[10px] md:text-sm font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase mb-2 flex items-center text-center">
+              <Trophy className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" /> Global Progressive Jackpot
             </span>
-            <span className="text-5xl md:text-7xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-b from-white via-yellow-200 to-casino-gold drop-shadow-[0_0_15px_rgba(251,191,36,0.8)] tracking-wider">
+            <span className="text-3xl sm:text-5xl md:text-7xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-b from-white via-yellow-200 to-casino-gold drop-shadow-[0_0_15px_rgba(251,191,36,0.8)] tracking-wider">
               ${jackpot.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </span>
           </div>
@@ -209,29 +209,29 @@ export default function Lobby() {
       </div>
 
       {/* 6. REALISTIC FOOTER */}
-      <footer className="w-full bg-black/80 border-t border-white/10 pt-16 pb-8 mt-10 rounded-t-[40px] px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+      <footer className="w-full bg-black/80 border-t border-white/10 pt-10 md:pt-16 pb-8 mt-10 rounded-t-[30px] md:rounded-t-[40px] px-4 md:px-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-10 mb-8 md:mb-12">
           <div>
-            <div className="flex items-center space-x-2 mb-6 group">
-              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-casino-gold/50 shadow-[0_0_15px_rgba(251,191,36,0.3)] flex items-center justify-center bg-black">
+            <div className="flex items-center space-x-2 mb-4 md:mb-6 group">
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden border-2 border-casino-gold/50 shadow-[0_0_15px_rgba(251,191,36,0.3)] flex items-center justify-center bg-black">
                 <img src="/images/logo.png" alt="Scorpio88 Logo" className="w-full h-full object-cover" />
               </div>
-              <span className="text-xl font-black tracking-wider text-white">
+              <span className="text-lg md:text-xl font-black tracking-wider text-white">
                 SCORPIO<span className="text-casino-gold">88</span>
               </span>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+            <p className="text-gray-400 text-xs md:text-sm leading-relaxed mb-4 md:mb-6">
               The world's most trusted premium online casino. Experience fair play, instant withdrawals, and 24/7 VIP customer support.
             </p>
             <div className="flex items-center gap-2">
-              <ShieldCheck className="text-green-500 w-6 h-6" />
-              <span className="text-gray-300 font-bold text-sm">100% Secure & Verified</span>
+              <ShieldCheck className="text-green-500 w-5 h-5 md:w-6 md:h-6" />
+              <span className="text-gray-300 font-bold text-xs md:text-sm">100% Secure & Verified</span>
             </div>
           </div>
           
-          <div>
-            <h4 className="text-white font-bold mb-6 tracking-widest uppercase">Information</h4>
-            <ul className="space-y-3 text-sm text-gray-400">
+          <div className="mt-4 md:mt-0">
+            <h4 className="text-white font-bold mb-4 md:mb-6 tracking-widest uppercase text-sm md:text-base">Information</h4>
+            <ul className="space-y-2 md:space-y-3 text-xs md:text-sm text-gray-400">
               <li className="hover:text-casino-gold cursor-pointer transition-colors">About Us</li>
               <li className="hover:text-casino-gold cursor-pointer transition-colors">Terms & Conditions</li>
               <li className="hover:text-casino-gold cursor-pointer transition-colors">Privacy Policy</li>
@@ -239,9 +239,9 @@ export default function Lobby() {
             </ul>
           </div>
           
-          <div>
-            <h4 className="text-white font-bold mb-6 tracking-widest uppercase">Providers</h4>
-            <div className="grid grid-cols-2 gap-3 text-sm text-gray-500 font-bold">
+          <div className="mt-4 md:mt-0">
+            <h4 className="text-white font-bold mb-4 md:mb-6 tracking-widest uppercase text-sm md:text-base">Providers</h4>
+            <div className="grid grid-cols-2 gap-2 md:gap-3 text-xs md:text-sm text-gray-500 font-bold">
               <span>Pragmatic Play</span>
               <span>PG Soft</span>
               <span>Evolution</span>
@@ -251,22 +251,22 @@ export default function Lobby() {
             </div>
           </div>
 
-          <div>
-            <h4 className="text-white font-bold mb-6 tracking-widest uppercase">Payment Methods</h4>
+          <div className="mt-4 md:mt-0">
+            <h4 className="text-white font-bold mb-4 md:mb-6 tracking-widest uppercase text-sm md:text-base">Payment Methods</h4>
             <div className="flex flex-wrap gap-2">
-              <div className="bg-white/5 border border-white/10 px-3 py-1.5 rounded flex items-center justify-center font-black text-blue-500 italic text-xs">BCA</div>
-              <div className="bg-white/5 border border-white/10 px-3 py-1.5 rounded flex items-center justify-center font-black text-yellow-500 italic text-xs">MANDIRI</div>
-              <div className="bg-white/5 border border-white/10 px-3 py-1.5 rounded flex items-center justify-center font-black text-orange-500 italic text-xs">BNI</div>
-              <div className="bg-white/5 border border-white/10 px-3 py-1.5 rounded flex items-center justify-center font-black text-blue-400 italic text-xs">BRI</div>
-              <div className="bg-white/5 border border-white/10 px-3 py-1.5 rounded flex items-center justify-center font-black text-green-400 text-xs">USDT</div>
-              <div className="bg-white/5 border border-white/10 px-3 py-1.5 rounded flex items-center justify-center font-black text-orange-400 text-xs">BITCOIN</div>
+              <div className="bg-white/5 border border-white/10 px-2 py-1 md:px-3 md:py-1.5 rounded flex items-center justify-center font-black text-blue-500 italic text-[10px] md:text-xs">BCA</div>
+              <div className="bg-white/5 border border-white/10 px-2 py-1 md:px-3 md:py-1.5 rounded flex items-center justify-center font-black text-yellow-500 italic text-[10px] md:text-xs">MANDIRI</div>
+              <div className="bg-white/5 border border-white/10 px-2 py-1 md:px-3 md:py-1.5 rounded flex items-center justify-center font-black text-orange-500 italic text-[10px] md:text-xs">BNI</div>
+              <div className="bg-white/5 border border-white/10 px-2 py-1 md:px-3 md:py-1.5 rounded flex items-center justify-center font-black text-blue-400 italic text-[10px] md:text-xs">BRI</div>
+              <div className="bg-white/5 border border-white/10 px-2 py-1 md:px-3 md:py-1.5 rounded flex items-center justify-center font-black text-green-400 text-[10px] md:text-xs">USDT</div>
+              <div className="bg-white/5 border border-white/10 px-2 py-1 md:px-3 md:py-1.5 rounded flex items-center justify-center font-black text-orange-400 text-[10px] md:text-xs">BITCOIN</div>
             </div>
           </div>
         </div>
         
-        <div className="border-t border-white/5 pt-8 text-center text-xs text-gray-600 font-medium">
+        <div className="border-t border-white/5 pt-6 md:pt-8 text-center text-[10px] md:text-xs text-gray-600 font-medium">
           <p>© 2026 SCORPIO88 CASINO. All rights reserved.</p>
-          <p className="mt-2">Licensed and regulated by the Government of Curacao.</p>
+          <p className="mt-1 md:mt-2">Licensed and regulated by the Government of Curacao.</p>
         </div>
       </footer>
 

@@ -124,17 +124,17 @@ export default function DiceGame({ user, setUser }) {
         </button>
       </div>
 
-      <div className="w-full md:w-2/3 flex flex-col justify-center items-center bg-black rounded-[30px] border border-white/10 p-8 min-h-[500px] shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden">
+      <div className="w-full md:w-2/3 flex flex-col justify-center items-center bg-black rounded-[20px] md:rounded-[30px] border border-white/10 p-4 md:p-8 min-h-[350px] md:min-h-[500px] shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at center, #a855f7 2px, transparent 2px)', backgroundSize: '40px 40px' }}></div>
         
         {result ? (
-          <div className="text-center animate-in zoom-in duration-300 z-10 p-10 bg-black/60 backdrop-blur-md rounded-[30px] border border-white/10 shadow-2xl min-w-[300px]">
-            <div className="text-sm text-gray-400 font-bold uppercase tracking-widest mb-4">Roll Result</div>
-            <div className={`text-9xl font-black font-mono mb-6 tracking-tighter ${result.isWin ? 'neon-text-green text-green-400' : 'text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]'}`}>
+          <div className="text-center animate-in zoom-in duration-300 z-10 p-6 md:p-10 bg-black/60 backdrop-blur-md rounded-[20px] md:rounded-[30px] border border-white/10 shadow-2xl min-w-[250px] md:min-w-[300px]">
+            <div className="text-xs md:text-sm text-gray-400 font-bold uppercase tracking-widest mb-4">Roll Result</div>
+            <div className={`text-7xl md:text-9xl font-black font-mono mb-4 md:mb-6 tracking-tighter ${result.isWin ? 'neon-text-green text-green-400' : 'text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]'}`}>
               {result.roll.toFixed(2)}
             </div>
             
-            <div className="text-2xl font-black tracking-wider">
+            <div className="text-xl md:text-2xl font-black tracking-wider">
               {result.isWin ? (
                 <div className="text-neon-green">
                   +{result.winAmount.toLocaleString()} WON

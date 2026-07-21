@@ -154,16 +154,16 @@ export default function SlotGame({ user, setUser }) {
         )}
       </div>
 
-      <div className="w-full md:w-2/3 bg-black rounded-[30px] p-6 md:p-10 border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden flex items-center justify-center min-h-[500px]">
+      <div className="w-full md:w-2/3 bg-black rounded-[20px] md:rounded-[30px] p-4 md:p-10 border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden flex items-center justify-center min-h-[350px] md:min-h-[500px]">
         {/* Luxury Machine Border Inner */}
-        <div className="absolute inset-2 border-2 border-casino-gold/20 rounded-[22px] pointer-events-none"></div>
+        <div className="absolute inset-2 border-2 border-casino-gold/20 rounded-[14px] md:rounded-[22px] pointer-events-none"></div>
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, #ec4899 2px, transparent 2px)', backgroundSize: '40px 40px' }}></div>
         
-        <div className="grid grid-cols-7 gap-2 relative z-10 w-full max-w-2xl mx-auto p-4 bg-gray-900/80 backdrop-blur-sm rounded-2xl border border-white/5 shadow-inner">
+        <div className="grid grid-cols-7 gap-1 md:gap-2 relative z-10 w-full max-w-2xl mx-auto p-2 md:p-4 bg-gray-900/80 backdrop-blur-sm rounded-xl md:rounded-2xl border border-white/5 shadow-inner">
           {grid.map((symbol, index) => (
             <div 
               key={index} 
-              className={`aspect-square flex items-center justify-center text-3xl md:text-5xl bg-black rounded-xl shadow-[inset_0_0_15px_rgba(255,255,255,0.05)] border border-white/10 transition-all duration-300 ${symbol === '🌟' ? 'animate-pulse drop-shadow-[0_0_15px_rgba(236,72,153,0.8)] border-neon-pink/50' : ''}`}
+              className={`aspect-square flex items-center justify-center text-xl sm:text-3xl md:text-5xl bg-black rounded-md md:rounded-xl shadow-[inset_0_0_15px_rgba(255,255,255,0.05)] border border-white/10 transition-all duration-300 ${symbol === '🌟' ? 'animate-pulse drop-shadow-[0_0_15px_rgba(236,72,153,0.8)] border-neon-pink/50' : ''}`}
             >
               <div className={animating ? "animate-bounce" : ""}>{symbol}</div>
             </div>

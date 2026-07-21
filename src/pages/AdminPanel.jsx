@@ -157,8 +157,8 @@ export default function AdminPanel() {
             <Users className="w-6 h-6 mr-3 text-casino-gold" /> PLAYER DATABASE
           </h2>
           
-          <div className="overflow-hidden rounded-2xl border border-white/5">
-            <table className="w-full text-left border-collapse bg-gray-900/30">
+          <div className="overflow-x-auto rounded-2xl border border-white/5">
+            <table className="w-full min-w-[500px] text-left border-collapse bg-gray-900/30">
               <thead>
                 <tr className="bg-black/50 text-gray-400 text-xs font-bold uppercase tracking-widest">
                   <th className="p-4 border-b border-white/5">Player</th>

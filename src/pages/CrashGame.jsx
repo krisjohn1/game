@@ -132,12 +132,12 @@ export default function CrashGame({ user, setUser }) {
         <div className={`relative h-64 md:h-[450px] rounded-[30px] border-2 shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden flex items-center justify-center transition-all duration-300 ${result ? (result.isWin ? 'border-neon-green bg-green-500/10' : 'border-red-500 bg-red-500/10') : 'border-white/10 bg-black'}`}>
           <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at center, #00f3ff 2px, transparent 2px)', backgroundSize: '40px 40px' }}></div>
           
-          <div className="text-center z-10 p-8 rounded-3xl bg-black/40 backdrop-blur-sm border border-white/5">
-            <div className={`text-8xl font-black font-mono transition-colors drop-shadow-xl ${result ? (result.isWin ? 'neon-text-green text-green-400' : 'text-red-500') : 'text-white'}`}>
+          <div className="text-center z-10 p-6 md:p-8 rounded-[20px] md:rounded-3xl bg-black/40 backdrop-blur-sm border border-white/5 min-w-[200px] md:min-w-[300px]">
+            <div className={`text-6xl md:text-8xl font-black font-mono transition-colors drop-shadow-xl ${result ? (result.isWin ? 'neon-text-green text-green-400' : 'text-red-500') : 'text-white'}`}>
               {liveMultiplier.toFixed(2)}x
             </div>
             {result && (
-              <div className="mt-4 text-2xl font-black tracking-wider">
+              <div className="mt-2 md:mt-4 text-xl md:text-2xl font-black tracking-wider">
                 {result.isWin ? (
                   <span className="text-neon-green">+{result.winAmount.toLocaleString()} WON</span>
                 ) : (
