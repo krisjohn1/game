@@ -146,12 +146,12 @@ export default function Lobby() {
   ];
 
   const categories = [
-    { id: 'hotGames', name: t('categories.hotGames'), icon: <Flame className="w-5 h-5 text-red-500" /> },
-    { id: 'slots', name: t('categories.slots'), icon: <Cherry className="w-5 h-5 text-neon-pink" /> },
-    { id: 'originals', name: t('categories.originals'), icon: <Zap className="w-5 h-5 text-cyan-400" /> },
-    { id: 'liveCasino', name: t('categories.liveCasino'), icon: <MonitorPlay className="w-5 h-5 text-blue-400" /> },
-    { id: 'sports', name: t('categories.sports'), icon: <Trophy className="w-5 h-5 text-casino-gold" /> },
-    { id: 'promotions', name: t('categories.promotions'), icon: <Megaphone className="w-5 h-5 text-green-400" /> }
+    { id: 'hotGames', name: t('lobby.categories.hotGames'), icon: <Flame className="w-5 h-5 text-red-500" /> },
+    { id: 'slots', name: t('lobby.categories.slots'), icon: <Cherry className="w-5 h-5 text-neon-pink" /> },
+    { id: 'originals', name: t('lobby.categories.originals'), icon: <Zap className="w-5 h-5 text-cyan-400" /> },
+    { id: 'liveCasino', name: t('lobby.categories.liveCasino'), icon: <MonitorPlay className="w-5 h-5 text-blue-400" /> },
+    { id: 'sports', name: t('lobby.categories.sports'), icon: <Trophy className="w-5 h-5 text-casino-gold" /> },
+    { id: 'promotions', name: t('lobby.categories.promotions'), icon: <Megaphone className="w-5 h-5 text-green-400" /> }
   ];
 
   const displayedGames = games.filter(game => {
@@ -170,9 +170,9 @@ export default function Lobby() {
           </div>
           <div>
             <div className="text-sm text-gray-300">
-              <span className="font-bold text-white">{liveWin.name}</span> {t('justWon')} <span className="font-bold text-neon-green">${liveWin.amount}</span>
+              <span className="font-bold text-white">{liveWin.name}</span> {t('lobby.justWon')} <span className="font-bold text-neon-green">${liveWin.amount}</span>
             </div>
-            <div className="text-xs text-gray-500 font-bold">{t('on')} {liveWin.game}</div>
+            <div className="text-xs text-gray-500 font-bold">{t('lobby.on')} {liveWin.game}</div>
           </div>
         </div>
       )}
@@ -222,7 +222,7 @@ export default function Lobby() {
         </div>
         <div className="flex-1 overflow-hidden relative flex">
           <div className="animate-marquee whitespace-nowrap flex items-center text-xs md:text-sm font-medium text-gray-300">
-            <span className="mx-4 md:mx-8">{t('marquee')}</span>
+            <span className="mx-4 md:mx-8">{t('lobby.marquee')}</span>
           </div>
         </div>
       </div>
@@ -320,8 +320,8 @@ export default function Lobby() {
       ) : (
         <div className="w-full flex flex-col items-center justify-center py-20 bg-white/5 rounded-2xl border border-white/10 mb-20">
           <MonitorPlay className="w-16 h-16 text-gray-600 mb-4" />
-          <h3 className="text-2xl font-black text-white mb-2">{t('comingSoon')}</h3>
-          <p className="text-gray-400 max-w-md text-center">{t('comingSoonDesc')}</p>
+          <h3 className="text-2xl font-black text-white mb-2">{t('lobby.comingSoon')}</h3>
+          <p className="text-gray-400 max-w-md text-center">{t('lobby.comingSoonDesc')}</p>
         </div>
       )}
 
