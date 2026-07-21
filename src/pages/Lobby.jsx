@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Dices, Rocket, Cherry, Flame, Trophy, Megaphone, MonitorPlay, ShieldCheck, Zap, Coins, ChevronRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Lobby() {
   const [jackpot, setJackpot] = useState(15849203.45);
+  const { t } = useLanguage();
 
   // Simulate live jackpot increment
   useEffect(() => {
@@ -103,13 +105,13 @@ export default function Lobby() {
               HOT PROMO
             </div>
             <h1 className="text-3xl md:text-6xl font-black text-white mb-2 md:mb-4 leading-tight">
-              WELCOME BONUS <span className="text-transparent bg-clip-text bg-gradient-to-r from-casino-gold to-yellow-200">100%</span>
+              {t('lobby.welcomeBonus')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-casino-gold to-yellow-200">100%</span>
             </h1>
             <p className="text-gray-300 text-sm md:text-xl mb-4 md:mb-8 max-w-lg hidden sm:block">
-              Double your first deposit instantly. Experience the most trusted VIP Casino Lounge today!
+              {t('lobby.upTo')} $1,000,000 {t('lobby.forNewMembers')}!
             </p>
             <button className="px-6 py-2 md:px-8 md:py-4 bg-gradient-to-r from-casino-gold via-yellow-300 to-casino-gold rounded-lg md:rounded-xl text-black font-black tracking-widest text-sm md:text-lg hover:scale-105 transition-transform shadow-[0_0_20px_rgba(251,191,36,0.5)]">
-              CLAIM NOW
+              {t('lobby.claimNow')}
             </button>
           </div>
         </div>
@@ -138,7 +140,7 @@ export default function Lobby() {
         <div className="bg-gradient-to-b from-yellow-900/40 to-black p-[2px] rounded-2xl shadow-[0_0_30px_rgba(251,191,36,0.3)] mx-4 w-full md:w-auto">
           <div className="bg-black/90 px-4 py-4 md:px-10 md:py-6 rounded-2xl border border-casino-gold/20 flex flex-col items-center">
             <span className="text-casino-gold text-[10px] md:text-sm font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase mb-2 flex items-center text-center">
-              <Trophy className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" /> Global Progressive Jackpot
+              <Trophy className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" /> {t('lobby.liveJackpot')}
             </span>
             <span className="text-3xl sm:text-5xl md:text-7xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-b from-white via-yellow-200 to-casino-gold drop-shadow-[0_0_15px_rgba(251,191,36,0.8)] tracking-wider">
               ${jackpot.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -160,7 +162,7 @@ export default function Lobby() {
       {/* 5. GAMES GRID */}
       <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
         <h2 className="text-2xl font-black flex items-center text-white">
-          <Flame className="text-red-500 mr-2 w-6 h-6" /> HOT GAMES
+          <Flame className="text-red-500 mr-2 w-6 h-6" /> {t('lobby.hotGames')}
         </h2>
         <button className="text-sm font-bold text-gray-400 hover:text-casino-gold flex items-center">
           VIEW ALL <ChevronRight className="w-4 h-4 ml-1" />
@@ -199,7 +201,7 @@ export default function Lobby() {
                 <div className={`absolute inset-0 bg-gradient-to-r ${game.color} animate-pulse-glow`}></div>
                 <div className="absolute inset-[1px] bg-black rounded-[7px] flex items-center justify-center">
                   <span className={`font-bold tracking-widest text-sm text-transparent bg-clip-text bg-gradient-to-r ${game.color}`}>
-                    PLAY
+                    {t('lobby.playNow')}
                   </span>
                 </div>
               </div>
@@ -221,26 +223,26 @@ export default function Lobby() {
               </span>
             </div>
             <p className="text-gray-400 text-xs md:text-sm leading-relaxed mb-4 md:mb-6">
-              The world's most trusted premium online casino. Experience fair play, instant withdrawals, and 24/7 VIP customer support.
+              {t('footer.description')}
             </p>
             <div className="flex items-center gap-2">
               <ShieldCheck className="text-green-500 w-5 h-5 md:w-6 md:h-6" />
-              <span className="text-gray-300 font-bold text-xs md:text-sm">100% Secure & Verified</span>
+              <span className="text-gray-300 font-bold text-xs md:text-sm">{t('footer.secure')}</span>
             </div>
           </div>
           
           <div className="mt-4 md:mt-0">
-            <h4 className="text-white font-bold mb-4 md:mb-6 tracking-widest uppercase text-sm md:text-base">Information</h4>
+            <h4 className="text-white font-bold mb-4 md:mb-6 tracking-widest uppercase text-sm md:text-base">{t('footer.information')}</h4>
             <ul className="space-y-2 md:space-y-3 text-xs md:text-sm text-gray-400">
-              <li><Link to="/about" className="hover:text-casino-gold cursor-pointer transition-colors">About Us</Link></li>
-              <li><Link to="/terms" className="hover:text-casino-gold cursor-pointer transition-colors">Terms & Conditions</Link></li>
-              <li><Link to="/privacy" className="hover:text-casino-gold cursor-pointer transition-colors">Privacy Policy</Link></li>
-              <li><Link to="/responsible-gaming" className="hover:text-casino-gold cursor-pointer transition-colors">Responsible Gaming</Link></li>
+              <li><Link to="/about" className="hover:text-casino-gold cursor-pointer transition-colors">{t('footer.aboutUs')}</Link></li>
+              <li><Link to="/terms" className="hover:text-casino-gold cursor-pointer transition-colors">{t('footer.terms')}</Link></li>
+              <li><Link to="/privacy" className="hover:text-casino-gold cursor-pointer transition-colors">{t('footer.privacy')}</Link></li>
+              <li><Link to="/responsible-gaming" className="hover:text-casino-gold cursor-pointer transition-colors">{t('footer.responsibleGaming')}</Link></li>
             </ul>
           </div>
           
           <div className="mt-4 md:mt-0">
-            <h4 className="text-white font-bold mb-4 md:mb-6 tracking-widest uppercase text-sm md:text-base">Providers</h4>
+            <h4 className="text-white font-bold mb-4 md:mb-6 tracking-widest uppercase text-sm md:text-base">{t('footer.providers')}</h4>
             <div className="grid grid-cols-2 gap-2 md:gap-3 text-xs md:text-sm text-gray-500 font-bold">
               <span>Pragmatic Play</span>
               <span>PG Soft</span>
@@ -252,7 +254,7 @@ export default function Lobby() {
           </div>
 
           <div className="mt-4 md:mt-0">
-            <h4 className="text-white font-bold mb-4 md:mb-6 tracking-widest uppercase text-sm md:text-base">Payment Methods</h4>
+            <h4 className="text-white font-bold mb-4 md:mb-6 tracking-widest uppercase text-sm md:text-base">{t('footer.paymentMethods')}</h4>
             <div className="flex flex-wrap gap-2">
               <div className="bg-white/5 border border-white/10 px-2 py-1 md:px-3 md:py-1.5 rounded flex items-center justify-center font-black text-blue-500 italic text-[10px] md:text-xs">BCA</div>
               <div className="bg-white/5 border border-white/10 px-2 py-1 md:px-3 md:py-1.5 rounded flex items-center justify-center font-black text-yellow-500 italic text-[10px] md:text-xs">MANDIRI</div>
@@ -265,8 +267,8 @@ export default function Lobby() {
         </div>
         
         <div className="border-t border-white/5 pt-6 md:pt-8 text-center text-[10px] md:text-xs text-gray-600 font-medium">
-          <p>© 2026 SCORPIO88 CASINO. All rights reserved.</p>
-          <p className="mt-1 md:mt-2">Licensed and regulated by the Government of Curacao.</p>
+          <p>{t('footer.copyright')}</p>
+          <p className="mt-1 md:mt-2">{t('footer.license')}</p>
         </div>
       </footer>
 

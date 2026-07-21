@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Lock, User, Crown, Eye, EyeOff, Mail } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function AuthModal({ onClose, onSuccess }) {
   const [isLogin, setIsLogin] = useState(true);
@@ -9,6 +10,7 @@ export default function AuthModal({ onClose, onSuccess }) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const { t } = useLanguage();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +19,7 @@ export default function AuthModal({ onClose, onSuccess }) {
     const endpoint = isLogin ? '/api/login' : '/api/register';
     
     const payload = isLogin 
-      ? { username, password } // backend will treat 'username' field as username/email
+      ? { username, password }
       : { username, email, password };
 
     const API_URL = import.meta.env.PROD ? '' : 'http://localhost:3030';
@@ -39,12 +41,12 @@ export default function AuthModal({ onClose, onSuccess }) {
         localStorage.setItem('token', data.token);
         onSuccess(data.user);
       } else {
-        setIsLogin(true); // switch to login on success register
-        setError('Registration successful! Please login.');
+        setIsLogin(true);
+        setError(t('auth.registerSuccess'));
         setLoading(false);
       }
     } catch (err) {
-      setError('Network error. Is the backend running?');
+      setError(t('auth.networkError'));
       setLoading(false);
     }
   };
@@ -60,7 +62,7 @@ export default function AuthModal({ onClose, onSuccess }) {
               <Crown className="w-5 h-5 text-casino-gold" />
             </div>
             <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 tracking-wider">
-              {isLogin ? 'VIP LOGIN' : 'JOIN VIP'}
+              {isLogin ? t('auth.vipLogin') : t('auth.joinVip')}
             </h2>
           </div>
           <button onClick={onClose} className="text-gray-500 hover:text-casino-gold transition-colors hover:rotate-90 duration-300">
@@ -70,7 +72,7 @@ export default function AuthModal({ onClose, onSuccess }) {
 
         <form onSubmit={handleSubmit} className="p-8 pt-4 space-y-6">
           {error && (
-            <div className={`p-4 rounded-xl text-sm font-bold border ${error.includes('successful') ? 'bg-green-500/10 text-neon-green border-neon-green/30 shadow-[0_0_10px_rgba(57,255,20,0.2)]' : 'bg-red-500/10 text-red-500 border-red-500/30 shadow-[0_0_10px_rgba(239,68,68,0.2)]'} animate-in slide-in-from-top-2`}>
+            <div className={`p-4 rounded-xl text-sm font-bold border ${error.includes('successful') || error.includes('berhasil') ? 'bg-green-500/10 text-neon-green border-neon-green/30 shadow-[0_0_10px_rgba(57,255,20,0.2)]' : 'bg-red-500/10 text-red-500 border-red-500/30 shadow-[0_0_10px_rgba(239,68,68,0.2)]'} animate-in slide-in-from-top-2`}>
               {error}
             </div>
           )}
@@ -78,7 +80,7 @@ export default function AuthModal({ onClose, onSuccess }) {
           <div className="space-y-5">
             <div>
               <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">
-                {isLogin ? 'Username / Email' : 'Username'}
+                {isLogin ? t('auth.usernameOrEmail') : t('auth.username')}
               </label>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -90,14 +92,14 @@ export default function AuthModal({ onClose, onSuccess }) {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="block w-full pl-12 pr-4 py-4 bg-gray-900/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-casino-gold/50 focus:border-casino-gold/50 transition-all font-medium text-lg"
-                  placeholder={isLogin ? "Enter username or email" : "Enter username"}
+                  placeholder={isLogin ? t('auth.enterUsernameOrEmail') : t('auth.enterUsername')}
                 />
               </div>
             </div>
 
             {!isLogin && (
               <div>
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Email Address</label>
+                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">{t('auth.email')}</label>
                 <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <Mail className="h-5 w-5 text-gray-500 group-focus-within:text-casino-gold transition-colors" />
@@ -108,14 +110,14 @@ export default function AuthModal({ onClose, onSuccess }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="block w-full pl-12 pr-4 py-4 bg-gray-900/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-casino-gold/50 focus:border-casino-gold/50 transition-all font-medium text-lg"
-                    placeholder="Enter email address"
+                    placeholder={t('auth.enterEmail')}
                   />
                 </div>
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Password</label>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">{t('auth.password')}</label>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <Lock className="h-5 w-5 text-gray-500 group-focus-within:text-casino-gold transition-colors" />
@@ -144,7 +146,7 @@ export default function AuthModal({ onClose, onSuccess }) {
             disabled={loading}
             className="w-full py-4 mt-8 bg-gradient-to-r from-casino-gold via-yellow-200 to-casino-gold bg-[length:200%_auto] hover:animate-[spin-slow_2s_linear_infinite] rounded-xl font-black text-black tracking-widest text-lg shadow-[0_0_20px_rgba(251,191,36,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-70 disabled:hover:scale-100"
           >
-            {loading ? 'PROCESSING...' : (isLogin ? 'ENTER CASINO' : 'CREATE ACCOUNT')}
+            {loading ? t('auth.processing') : (isLogin ? t('auth.enterCasino') : t('auth.createAccount'))}
           </button>
 
           <div className="text-center mt-6">
@@ -153,7 +155,7 @@ export default function AuthModal({ onClose, onSuccess }) {
               onClick={() => { setIsLogin(!isLogin); setError(''); setUsername(''); setEmail(''); setPassword(''); setShowPassword(false); }}
               className="text-gray-400 hover:text-white font-medium text-sm transition-colors border-b border-transparent hover:border-casino-gold pb-0.5"
             >
-              {isLogin ? "Don't have an account? Register Now" : "Already a VIP? Login Here"}
+              {isLogin ? t('auth.noAccount') : t('auth.hasAccount')}
             </button>
           </div>
         </form>

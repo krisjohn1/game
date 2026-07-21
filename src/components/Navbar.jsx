@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Coins, LogOut, Settings, UserCircle, LogIn, Wallet } from 'lucide-react';
+import { Coins, LogOut, Settings, UserCircle, LogIn, Wallet, Globe } from 'lucide-react';
 import WalletModal from './WalletModal';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Navbar({ user, onLoginClick, onLogout }) {
   const [showWallet, setShowWallet] = useState(false);
+  const [showLangMenu, setShowLangMenu] = useState(false);
+  const { lang, changeLang, t } = useLanguage();
 
   return (
     <>
@@ -19,6 +22,42 @@ export default function Navbar({ user, onLoginClick, onLogout }) {
         </Link>
 
         <div className="flex items-center space-x-2 md:space-x-6">
+          {/* Language Switcher */}
+          <div className="relative">
+            <button 
+              onClick={() => setShowLangMenu(!showLangMenu)}
+              className="flex items-center gap-1.5 px-2 py-1.5 md:px-3 md:py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-gray-300 hover:text-white transition-all text-xs md:text-sm font-bold"
+            >
+              <Globe className="w-4 h-4 text-casino-gold" />
+              <span className="hidden md:inline">{lang === 'id' ? '🇮🇩 ID' : '🇬🇧 EN'}</span>
+              <span className="inline md:hidden">{lang === 'id' ? '🇮🇩' : '🇬🇧'}</span>
+            </button>
+            
+            {showLangMenu && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setShowLangMenu(false)}></div>
+                <div className="absolute right-0 top-full mt-2 w-48 bg-black/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-[0_0_30px_rgba(0,0,0,0.8)] overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <button 
+                    onClick={() => { changeLang('id'); setShowLangMenu(false); }}
+                    className={`w-full text-left px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition-colors ${lang === 'id' ? 'text-casino-gold bg-casino-gold/10' : 'text-gray-300'}`}
+                  >
+                    <span className="text-lg">🇮🇩</span>
+                    <span className="font-bold text-sm">Bahasa Indonesia</span>
+                    {lang === 'id' && <span className="ml-auto text-casino-gold">✓</span>}
+                  </button>
+                  <button 
+                    onClick={() => { changeLang('en'); setShowLangMenu(false); }}
+                    className={`w-full text-left px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition-colors ${lang === 'en' ? 'text-casino-gold bg-casino-gold/10' : 'text-gray-300'}`}
+                  >
+                    <span className="text-lg">🇬🇧</span>
+                    <span className="font-bold text-sm">English</span>
+                    {lang === 'en' && <span className="ml-auto text-casino-gold">✓</span>}
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+
           {user ? (
             <>
               <button 
@@ -28,7 +67,7 @@ export default function Navbar({ user, onLoginClick, onLogout }) {
                 <div className="absolute inset-0 bg-gradient-to-r from-casino-gold via-yellow-200 to-casino-gold bg-[length:200%_auto] animate-[spin-slow_2s_linear_infinite] group-hover:animate-none"></div>
                 <div className="relative flex items-center text-xs md:text-base">
                   <Wallet className="w-4 h-4 md:mr-2" />
-                  <span className="hidden md:inline">DEPOSIT</span>
+                  <span className="hidden md:inline">{t('nav.deposit')}</span>
                 </div>
               </button>
 
@@ -64,8 +103,8 @@ export default function Navbar({ user, onLoginClick, onLogout }) {
               <div className="absolute inset-0 bg-gradient-to-r from-casino-gold via-yellow-200 to-casino-gold bg-[length:200%_auto] animate-[spin-slow_2s_linear_infinite] group-hover:animate-none"></div>
               <div className="relative flex items-center">
                 <LogIn className="w-4 h-4 md:w-5 md:h-5 mr-1 md:mr-2" />
-                <span className="hidden md:inline">LOGIN / REGISTER</span>
-                <span className="inline md:hidden">LOGIN</span>
+                <span className="hidden md:inline">{t('nav.login')} / {t('nav.register')}</span>
+                <span className="inline md:hidden">{t('nav.login')}</span>
               </div>
             </button>
           )}

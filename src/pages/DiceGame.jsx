@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Dices, ArrowDown, ArrowUp } from 'lucide-react';
 import BigWinCelebration from '../components/BigWinCelebration';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function DiceGame({ user, setUser }) {
   const [bet, setBet] = useState(100);
@@ -10,6 +11,7 @@ export default function DiceGame({ user, setUser }) {
   const [result, setResult] = useState(null);
   const [showBigWin, setShowBigWin] = useState(false);
   const [bigWinAmount, setBigWinAmount] = useState(0);
+  const { t } = useLanguage();
   
   const targetNumber = condition === 'under' ? chance : (100 - chance);
   const multiplier = (99 / chance).toFixed(2);
@@ -64,7 +66,7 @@ export default function DiceGame({ user, setUser }) {
           
           <div className="space-y-6 mb-8">
             <div className="bg-black/50 p-5 rounded-2xl border border-white/5">
-              <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-2">Bet Amount</label>
+              <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-2">{t('games.betAmount')}</label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-casino-gold font-bold">$</span>
                 <input 
@@ -82,19 +84,19 @@ export default function DiceGame({ user, setUser }) {
                 onClick={() => setCondition('under')}
                 className={`flex-1 flex justify-center items-center py-4 rounded-2xl border-2 transition-all font-black tracking-wider ${condition === 'under' ? 'bg-purple-600 border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)] text-white' : 'bg-black/40 border-white/10 text-gray-500 hover:border-white/30 hover:text-gray-300'}`}
               >
-                <ArrowDown className="w-5 h-5 mr-1" /> ROLL UNDER
+                <ArrowDown className="w-5 h-5 mr-1" /> {t('games.rollUnder')}
               </button>
               <button
                 onClick={() => setCondition('over')}
                 className={`flex-1 flex justify-center items-center py-4 rounded-2xl border-2 transition-all font-black tracking-wider ${condition === 'over' ? 'bg-purple-600 border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)] text-white' : 'bg-black/40 border-white/10 text-gray-500 hover:border-white/30 hover:text-gray-300'}`}
               >
-                <ArrowUp className="w-5 h-5 mr-1" /> ROLL OVER
+                <ArrowUp className="w-5 h-5 mr-1" /> {t('games.rollOver')}
               </button>
             </div>
 
             <div className="bg-black/50 p-5 rounded-2xl border border-white/5">
               <div className="flex justify-between items-end mb-4">
-                <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">Win Chance</span>
+                <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">{t('games.winChance')}</span>
                 <span className="text-3xl font-black text-purple-400 font-mono">{chance}%</span>
               </div>
               
@@ -108,8 +110,8 @@ export default function DiceGame({ user, setUser }) {
               />
               
               <div className="flex justify-between text-sm text-gray-400 mt-4 font-bold tracking-wide">
-                <span className="bg-white/5 px-3 py-1 rounded-lg">Target: {condition === 'under' ? `< ${targetNumber}` : `> ${targetNumber}`}</span>
-                <span className="bg-white/5 px-3 py-1 rounded-lg text-casino-gold">Payout: {multiplier}x</span>
+                <span className="bg-white/5 px-3 py-1 rounded-lg">{t('games.target')}: {condition === 'under' ? `< ${targetNumber}` : `> ${targetNumber}`}</span>
+                <span className="bg-white/5 px-3 py-1 rounded-lg text-casino-gold">{t('games.payout')}: {multiplier}x</span>
               </div>
             </div>
           </div>
@@ -120,7 +122,7 @@ export default function DiceGame({ user, setUser }) {
           disabled={loading}
           className="w-full py-5 rounded-2xl font-black tracking-widest text-xl text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100 transition-all shadow-[0_0_20px_rgba(168,85,247,0.4)] border border-purple-400/50"
         >
-          {loading ? 'ROLLING...' : 'ROLL DICE'}
+          {loading ? t('games.rolling') : t('games.rollDice')}
         </button>
       </div>
 

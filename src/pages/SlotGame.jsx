@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Cherry, Sparkles, Play } from 'lucide-react';
 import BigWinCelebration from '../components/BigWinCelebration';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function SlotGame({ user, setUser }) {
   const [bet, setBet] = useState(100);
@@ -10,6 +11,7 @@ export default function SlotGame({ user, setUser }) {
   const [animating, setAnimating] = useState(false);
   const [showBigWin, setShowBigWin] = useState(false);
   const [bigWinAmount, setBigWinAmount] = useState(0);
+  const { t } = useLanguage();
 
   const spinSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3');
 
@@ -91,7 +93,7 @@ export default function SlotGame({ user, setUser }) {
           
           <div className="space-y-6 mb-8">
             <div className="bg-black/50 p-5 rounded-2xl border border-white/5">
-              <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-2">Bet Amount</label>
+              <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-2">{t('games.betAmount')}</label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-casino-gold font-bold">$</span>
                 <input 
@@ -124,7 +126,7 @@ export default function SlotGame({ user, setUser }) {
           disabled={loading || animating}
           className="w-full py-5 flex items-center justify-center rounded-2xl font-black tracking-widest text-xl text-black bg-gradient-to-r from-casino-gold via-yellow-200 to-casino-gold hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100 transition-all shadow-[0_0_20px_rgba(251,191,36,0.4)]"
         >
-          {loading || animating ? 'SPINNING...' : (user.free_spins > 0 ? 'FREE SPIN' : 'SPIN')}
+          {loading || animating ? t('games.spinning') : (user.free_spins > 0 ? t('games.freeSpin') : t('games.spin'))}
           {!(loading || animating) && <Play className="w-6 h-6 ml-3 fill-current" />}
         </button>
 

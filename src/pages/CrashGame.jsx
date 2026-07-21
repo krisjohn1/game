@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Rocket, History } from 'lucide-react';
 import BigWinCelebration from '../components/BigWinCelebration';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function CrashGame({ user, setUser }) {
   const [bet, setBet] = useState(100);
@@ -12,6 +13,7 @@ export default function CrashGame({ user, setUser }) {
   const [isRunning, setIsRunning] = useState(false);
   const [showBigWin, setShowBigWin] = useState(false);
   const [bigWinAmount, setBigWinAmount] = useState(0);
+  const { t } = useLanguage();
 
   const API_URL = import.meta.env.PROD ? '' : 'http://localhost:3030';
   
@@ -88,7 +90,7 @@ export default function CrashGame({ user, setUser }) {
           
           <div className="space-y-6 mb-8">
             <div className="bg-black/50 p-5 rounded-2xl border border-white/5">
-              <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-2">Bet Amount</label>
+              <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-2">{t('games.betAmount')}</label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-casino-gold font-bold">$</span>
                 <input 
@@ -102,7 +104,7 @@ export default function CrashGame({ user, setUser }) {
             </div>
             
             <div className="bg-black/50 p-5 rounded-2xl border border-white/5">
-              <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-2">Auto Cashout</label>
+              <label className="block text-gray-400 text-xs font-bold tracking-widest uppercase mb-2">{t('games.autoCashout')}</label>
               <div className="relative">
                 <input 
                   type="number" 
@@ -124,7 +126,7 @@ export default function CrashGame({ user, setUser }) {
           disabled={loading || isRunning}
           className="w-full py-5 rounded-2xl font-black tracking-widest text-xl text-black bg-gradient-to-r from-neon-cyan via-blue-300 to-neon-cyan hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100 transition-all shadow-[0_0_20px_rgba(0,243,255,0.4)]"
         >
-          {isRunning ? 'FLYING...' : 'PLACE BET'}
+          {isRunning ? t('games.flying') : t('games.placeBet')}
         </button>
       </div>
 
