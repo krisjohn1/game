@@ -271,8 +271,11 @@ export default function Lobby() {
           {categories.find(c => c.id === activeCategory)?.icon} 
           <span className="ml-2 uppercase">{categories.find(c => c.id === activeCategory)?.name}</span>
         </h2>
-        <button className="text-sm font-bold text-gray-400 hover:text-casino-gold flex items-center">
-          VIEW ALL <ChevronRight className="w-4 h-4 ml-1" />
+        <button 
+          onClick={() => alert(t('lobby.comingSoonDesc'))}
+          className="text-sm font-bold text-gray-400 hover:text-casino-gold flex items-center active:scale-95 transition-all"
+        >
+          {t('lobby.viewAll')} <ChevronRight className="w-4 h-4 ml-1" />
         </button>
       </div>
 
